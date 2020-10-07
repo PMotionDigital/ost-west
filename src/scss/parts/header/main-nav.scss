@@ -1,0 +1,23 @@
+@import '../vars.scss';
+
+.main-nav {
+    background-color: $purple;
+    padding: .75rem 0;
+}
+
+.main-nav_menu {
+    ul {
+        display: flex;
+        list-style: none;
+        li {
+            &:not(:last-child) {
+                margin-right: 1.75rem;
+            }
+            a {
+                color: $white;
+                text-decoration: none;
+            }
+        }
+    }
+}
+

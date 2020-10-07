@@ -1,0 +1,5 @@
+.main-footer {
+    display: grid;
+    grid-template-columns: repeat(8,8fr);
+    grid-gap: 1rem;
+}

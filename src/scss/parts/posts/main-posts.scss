@@ -1,0 +1,53 @@
+@import '../vars.scss';
+
+.main-posts {
+    display: grid;
+    grid-template-columns: repeat(8,8fr);
+    grid-gap: 1rem;
+    .main-posts_left {
+        grid-column: 1/7;
+        display: grid;
+        grid-template-columns: repeat(2,2fr);
+        grid-gap: 1rem;
+        .main-post {
+            &:nth-child(1),
+            &:nth-child(6) {
+                grid-column: 1/3;
+                flex-direction: row;
+                .main-post_image {
+                    width: 60%;
+                    height: 50vh;
+                }
+                .main-post_desc {
+                    width: 40%;
+                }
+            } 
+            &_image {
+                height: 30vh;
+            }
+            &_desc {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                padding: 2rem;
+            }
+        }
+    }
+    .main-posts_sidebar {
+        grid-column: 7/9;
+    }
+}
+
+.main-posts_sidebar {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    align-items: flex-start;
+    align-content: flex-start;
+    grid-gap: 1rem;
+    .main-post {
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+    }
+}

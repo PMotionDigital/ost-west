@@ -1,0 +1,33 @@
+@import './parts/vars';
+
+// plugins
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+// libs
+@import './libs/grid.scss';
+
+// ui
+@import './parts/ui/images.scss';
+@import './parts/ui/section-title.scss';
+@import './parts/ui/text-politic.scss';
+
+// header
+@import './parts/header/main-nav.scss';
+@import './parts/header/main-header-top.scss';
+@import './parts/header/main-header-meta.scss';
+
+// footer
+@import './parts/footer/footer.scss';
+
+// blocks
+@import './parts/components/section-programm.scss';
+@import './parts/components/section-nowtv.scss';
+@import './parts/posts/main-posts.scss';
+@import './parts/posts/main-post.scss';
+
+// pages
+@import './parts/pages/page-home.scss';
+
+@import './parts/main';
+

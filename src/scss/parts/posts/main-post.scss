@@ -1,0 +1,47 @@
+@import '../vars.scss';
+
+.main-post {
+    position: relative;
+    border-radius: $mainBorderRadius;
+    overflow: hidden;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    .main-post_image {
+        position: relative;
+        overflow: hidden;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .main-post_desc {
+        padding: 2rem;
+    }
+
+    // модификатор, когда блок становится с серенивым фоном
+    &--important {
+        background-color: $purple;
+        .post-title,
+        .post-date,
+        .post-excerpt {
+            color: $white;
+        }
+    }
+}
+
+.post-title {
+    font-size: 1.5rem;
+}
+
+.post-date {
+    margin-top: 1rem;
+    color: $purple;
+    font-style: italic;
+    text-align: right;
+}
+

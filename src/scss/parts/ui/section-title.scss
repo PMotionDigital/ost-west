@@ -1,0 +1,10 @@
+@import '../vars.scss';
+
+.section-title {
+    &.type-1 {
+        & > * {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+    }
+}
