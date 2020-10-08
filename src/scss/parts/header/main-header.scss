@@ -1,0 +1,62 @@
+@import '../vars.scss';
+
+// Main header
+
+.main-header{
+    background-color: $white;
+}
+
+
+// Header top
+
+.header-top {
+    padding: 1rem 0;
+    background-color: $white;
+}
+
+.header-top_logo {
+    img {
+        width: 8rem;
+    }
+}
+
+
+// Header nav
+
+.main-nav {
+    background-color: $purple;
+    padding: .75rem 0;
+}
+
+    // Header menu
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu_item{
+    &:not(:last-child) {
+        margin-right: 1.75rem;
+    }
+    a {
+        color: $white;
+        text-decoration: none;
+    }
+}
+
+    //Header meta
+.nav-meta{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-meta_item-search,
+.nav-meta_item-user {
+    width: 3rem;
+}
+
+.nav-meta_item-user{
+    button{
+        color: white;
+    }
+}

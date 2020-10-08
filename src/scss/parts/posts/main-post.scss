@@ -7,41 +7,43 @@
     background-color: $white;
     display: flex;
     flex-direction: column;
-    .main-post_image {
-        position: relative;
-        overflow: hidden;
-        img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-    .main-post_desc {
-        padding: 2rem;
-    }
+}
 
-    // модификатор, когда блок становится с серенивым фоном
-    &--important {
-        background-color: $purple;
-        .post-title,
-        .post-date,
-        .post-excerpt {
-            color: $white;
-        }
+.main-post_desc {
+    padding: 2rem;
+}
+
+.main-post_image {
+    position: relative;
+    overflow: hidden;
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
-.post-title {
+.main-post_title {
     font-size: 1.5rem;
 }
 
-.post-date {
+.main-post_date {
     margin-top: 1rem;
     color: $purple;
     font-style: italic;
     text-align: right;
 }
 
+
+// модификатор, когда блок становится с серенивым фоном
+.main-post--important {
+    background-color: $purple;
+    .main-post_title,
+    .main-post_date,
+    .main-post_excerpt {
+        color: $white;
+    }
+}

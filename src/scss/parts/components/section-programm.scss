@@ -1,6 +1,6 @@
 @import '../vars.scss';
 
-.block-programm {
+.programm {
     padding: 2rem 0;
     background-color: #111;
     .section-title {
@@ -9,7 +9,9 @@
     }
 }
 
-.block-programm_slider {
+// Slider
+
+.programm_slider {
     /* the slides */
     .slick-slide {
         margin: 0 1rem;
@@ -18,19 +20,18 @@
     .slick-list {
         margin: 0 1rem;
     }
-    .slider_item {
-        .slider_item-image {
-            height: 35vh;
-            position: relative;
-            overflow: hidden;
-            img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
+}
+
+.slider_item-image {
+    height: 35vh;
+    position: relative;
+    overflow: hidden;
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
