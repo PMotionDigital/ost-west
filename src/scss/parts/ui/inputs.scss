@@ -1,0 +1,13 @@
+input, textarea {
+    -webkit-appearance: none;
+    background-color: $greyLight;
+    padding: 1rem 2rem;
+    color: $black;
+    border-radius: $buttonBorderRadius;
+    border: none;
+    font-size: inherit;
+    font-family: "MyriadPro";
+    &::placeholder {
+        color: $grey;
+    }
+}

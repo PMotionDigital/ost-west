@@ -14002,7 +14002,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
+/* harmony import */ var _parts_components_modals_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/components/modals/modals */ "./src/js/parts/components/modals/modals.js");
+/* harmony import */ var _parts_components_modals_modals__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_components_modals_modals__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _parts_components_modals_modal_login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/components/modals/modal-login */ "./src/js/parts/components/modals/modal-login.js");
+/* harmony import */ var _parts_components_modals_modal_register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/components/modals/modal-register */ "./src/js/parts/components/modals/modal-register.js");
+/* harmony import */ var _parts_pages_page_profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/pages/page-profile */ "./src/js/parts/pages/page-profile.js");
+/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_6__);
 // files
 // import './parts/test';
 // //
@@ -14010,7 +14017,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// modals 
+
+
+
+
+// pages
+
+
 // blocks
+
 
 
 
@@ -14040,6 +14056,245 @@ sliderProgramm.slick({
     slidesToScroll: 3,
     arrows: false
 })
+
+/***/ }),
+
+/***/ "./src/js/parts/components/modals/modal-login.js":
+/*!*******************************************************!*\
+  !*** ./src/js/parts/components/modals/modal-login.js ***!
+  \*******************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(jQuery) {/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+jQuery(function($){
+
+    const noteForm = $('.note-form');
+    const loginForm = $('#pt_login_form');
+    const formBtn = loginForm.find('button[type="submit"]');
+
+	loginForm.on('submit', function(e) {
+
+        e.preventDefault();
+        
+        const formData = [];
+
+        loginForm.serializeArray().forEach((el) => {
+            formData[el.name] = el.value;
+        });
+
+        console.log(formData);
+		$.ajax({
+            type: 'POST',
+            url: document.location.origin + '/wp-admin/admin-ajax.php',
+            data: {
+                action: 'pt_login_member',
+                ...formData
+            },
+            beforeSend: () => {
+                formBtn.addClass('loading');
+            },
+            success: (response) => {
+
+                let jsonOutput = JSON.parse(response);
+                let respMessage = jsonOutput.error;
+
+                noteForm.html('');
+                noteForm.addClass('open');
+                noteForm.html(respMessage);
+
+                console.log(jsonOutput);
+
+                formBtn.removeClass('loading');
+                
+            }
+        });
+
+	});
+
+});
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/components/modals/modal-register.js":
+/*!**********************************************************!*\
+  !*** ./src/js/parts/components/modals/modal-register.js ***!
+  \**********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(jQuery) {/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+jQuery(function($) {
+
+    const modalLogin = $('[data-modal="login"]');
+    const modalRegister = $('[data-modal="register"]');
+    const noteForm = $('.note-form');
+    const registerForm = $('#pt_registration_form');
+    const formBtn = registerForm.find('button[type="submit"]');
+
+	registerForm.on('submit', function(e) {
+
+        e.preventDefault();
+        
+        const formData = [];
+
+        registerForm.serializeArray().forEach((el) => {
+            formData[el.name] = el.value;
+        });
+
+        console.log(formData);
+		$.ajax({
+            type: 'POST',
+            url: document.location.origin + '/wp-admin/admin-ajax.php',
+            data: {
+                action: 'pt_register_member',
+                ...formData
+            },
+            beforeSend: () => {
+                formBtn.addClass('loading');
+            },
+            success: (response) => {
+
+                let jsonOutput = JSON.parse(response);
+                let respMessage = jsonOutput.error;
+
+                noteForm.html('');
+                noteForm.addClass('open');
+                noteForm.html(respMessage);
+
+                modalRegister.removeClass('open');
+                modalLogin.addClass('open');
+
+                console.log(jsonOutput);
+
+                formBtn.removeClass('loading');
+                
+            }
+        });
+
+
+	});
+
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/components/modals/modals.js":
+/*!**************************************************!*\
+  !*** ./src/js/parts/components/modals/modals.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {// Общие правила логики абсолютно для всех модалок
+
+const modal = $('.modal[data-modal]');
+const modalBtn = $('[data-modal-btn]');
+const modalClose = $('[data-modal-close]');
+
+modalBtn.on('click', function(e) {
+
+    e.preventDefault();
+
+    let curModal = $(this).attr('data-modal-btn');
+    $(`.modal`).removeClass('open');
+    $(`.modal[data-modal="${curModal}"]`).addClass('open');
+});
+
+modalClose.on('click', function() {
+    let curModal = $(this).closest('.modal')
+    curModal.removeClass('open');
+});
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/components/note-form.js":
+/*!**********************************************!*\
+  !*** ./src/js/parts/components/note-form.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {const noteForm = $('.note-form');
+const noteFormClose = noteForm.find('.note-form_close');
+
+noteFormClose.on('click', function() {
+    noteForm.html('');
+    noteForm.removeClass('open');
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/pages/page-profile.js":
+/*!********************************************!*\
+  !*** ./src/js/parts/pages/page-profile.js ***!
+  \********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(jQuery) {/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+jQuery(function($){
+
+	const profileForm = $('#data-fields_form');
+    const profileFormBtn = profileForm.find('.button');
+    const userId = $('[data-user-id]').attr('[data-user-id]');
+    const headeruserName = $('.user-stat_name');
+
+	// Post login form
+	profileForm.on('submit', function(e){
+
+        e.preventDefault();
+        const formData = [];
+        profileForm.serializeArray().forEach((el) => {
+            formData[el.name] = el.value;
+        });
+
+        console.log(formData);
+		$.ajax({
+            type: 'POST',
+            url: document.location.origin + '/wp-admin/admin-ajax.php',
+            data: {
+                action: 'update_user_profile',
+                ...formData
+            },
+            beforeSend: () => {
+                profileFormBtn.addClass('loading');
+            },
+            success: (response) => {
+                let jsonOutput = JSON.parse(response);
+                let userFirstName = jsonOutput.name;
+
+                headeruserName.html(userFirstName);
+                profileFormBtn.removeClass('loading');
+                
+            }
+        });
+
+	});
+
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 

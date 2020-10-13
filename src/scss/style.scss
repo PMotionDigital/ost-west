@@ -11,6 +11,8 @@
 @import './parts/ui/images.scss';
 @import './parts/ui/section-title.scss';
 @import './parts/ui/text-politic.scss';
+@import './parts/ui/buttons.scss';
+@import './parts/ui/inputs.scss';
 
 // header
 @import './parts/header/main-header.scss';
@@ -21,11 +23,17 @@
 // blocks
 @import './parts/components/section-programm.scss';
 @import './parts/components/section-nowtv.scss';
+@import './parts/components/note-form.scss';
 @import './parts/posts/main-posts.scss';
 @import './parts/posts/main-post.scss';
 
+// modals
+@import './parts/components/modals/modals.scss';
+
 // pages
+@import './parts/pages/page-default.scss';
 @import './parts/pages/page-home.scss';
+@import './parts/pages/page-profile.scss';
 
 @import './parts/main';
 

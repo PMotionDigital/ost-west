@@ -34,7 +34,7 @@
     list-style: none;
 }
 
-.nav-menu_item{
+.page_item {
     &:not(:last-child) {
         margin-right: 1.75rem;
     }
@@ -48,15 +48,46 @@
 .nav-meta{
     display: flex;
     justify-content: flex-end;
+    a {
+        text-decoration: none;
+    }
 }
 
-.nav-meta_item-search,
-.nav-meta_item-user {
+.nav-meta_item-search {
     width: 3rem;
 }
 
 .nav-meta_item-user{
     button{
         color: white;
+        padding: 0;
+    }
+    
+}
+
+// user-stat
+
+.user-stat {
+    display: flex;
+    align-items: center;
+    .user-stat_pic {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 100%;
+        position: relative;
+        overflow: hidden;
+        margin-right: .75rem;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .user-stat_name {
+        font-size: 1.1rem;
+        color: $white;
     }
 }
