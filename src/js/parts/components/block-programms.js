@@ -5,7 +5,9 @@ let sliderProgramm = $('[data-slider-programm]');
 
 sliderProgramm.slick({
     infinite: true,
+    focusOnSelect: true,
+    centerMode: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows: false
+    slidesToScroll: 1,
+    arrows: true
 })

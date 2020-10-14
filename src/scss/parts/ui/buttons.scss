@@ -12,11 +12,17 @@
     background-size: 1.75rem;
     background-color: $purple;
     transition: all .25s ease-in-out;
+    text-decoration: none;
     cursor: pointer;
     &.type-1 {
         background-color: transparent;
         border: 2px solid $purple;
         color: $purple;
+    }
+    &.type-2{
+        background-color: transparent;
+        border: 2px solid $white;
+        padding: .5rem 2rem;
     }
     &.loading {
         color: transparent;
