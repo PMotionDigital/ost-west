@@ -14052,9 +14052,11 @@ let sliderProgramm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-slider
 
 sliderProgramm.slick({
     infinite: true,
+    focusOnSelect: true,
+    centerMode: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows: false
+    slidesToScroll: 1,
+    arrows: true
 })
 
 /***/ }),
