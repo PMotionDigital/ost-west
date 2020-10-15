@@ -12,6 +12,7 @@ import './parts/components/modals/modal-register';
 
 // pages
 import './parts/pages/page-profile';
+import './parts/pages/page-programms';
 
 // blocks
 import './parts/components/block-programms';

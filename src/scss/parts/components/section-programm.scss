@@ -16,8 +16,9 @@
     .slick-slide {
         margin: 0 1rem;
         outline: none;
+        width: 25rem;
 
-        & > div:focus{
+        & > div:hover{
             outline: none;
         }
     }
@@ -53,7 +54,7 @@
     }
 }
 
-.slider_item{
+.programm-list_item{
     position: relative;
     transition: .2s ease-out;
 
@@ -70,7 +71,7 @@
         pointer-events: none;
     }
 
-    &:focus{
+    &:hover {
         transform: scale(1.25);
         z-index: 3;
         outline: none;
@@ -78,19 +79,19 @@
         &::before{
             opacity: .5;
         }
-        .slider_item-desc{
+        .programm-list_item-desc{
             opacity: 1;
             border-radius: 1rem;
         }
 
-        .slider_item-image img{
+        .programm-list_item-image img{
             border-radius: 1rem;
         }
     }
 }
 
-.slider_item-image {
-    height: 16rem;
+.programm-list_item-image {
+    height: 14rem;
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -104,11 +105,11 @@
     }
 }
 
-.slider_item-desc{
+.programm-list_item-desc{
     transition: .2s ease-out;
     position: absolute;
     z-index: 2;
-    padding: 2rem;
+    padding: 7%;
     display: flex;
     opacity: 0;
     flex-direction: column;
@@ -124,7 +125,7 @@
     box-shadow: inset 0 -15rem 6rem 0 rgba(0,0,0,0.6);
 }
 
-.slider_item-buttons a{
+.programm-list_item-buttons a{
     margin-right: 1rem;
 }
 

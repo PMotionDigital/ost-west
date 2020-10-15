@@ -20,6 +20,28 @@
     }
 }
 
+.socials-list{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.socials-list_item a{
+    display: flex;
+    width: 2.3rem;
+    height: 2.3rem;
+    box-sizing: border-box;
+    background-color: $purple;
+    justify-content: center;
+    align-items: center;
+    margin-left: .5rem;
+    border-radius: 5px;
+
+    img{
+        height: 1.3rem;
+        width: auto;
+    }
+}
+
 
 // Header nav
 

@@ -459,6 +459,11 @@ img {
   .text-block h1:first-child, .text-block h2:first-child, .text-block h3:first-child, .text-block h4:first-child, .text-block h5:first-child {
     margin-top: 0; }
 
+button {
+  outline: none; }
+  button:hover, button:focus {
+    outline: none; }
+
 .button {
   display: inline-block;
   border-radius: 0.5rem;
@@ -508,6 +513,24 @@ input, textarea {
 
 .header-top_logo img {
   width: 8rem; }
+
+.socials-list {
+  display: flex;
+  justify-content: flex-end; }
+
+.socials-list_item a {
+  display: flex;
+  width: 2.3rem;
+  height: 2.3rem;
+  box-sizing: border-box;
+  background-color: #804284;
+  justify-content: center;
+  align-items: center;
+  margin-left: .5rem;
+  border-radius: 5px; }
+  .socials-list_item a img {
+    height: 1.3rem;
+    width: auto; }
 
 .main-nav {
   background-color: #804284;
@@ -559,7 +582,8 @@ input, textarea {
     color: #fff; }
 
 .main-footer {
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 2rem 0 3rem; }
 
 .programm {
   padding: 2rem 0 3rem 0;
@@ -572,8 +596,9 @@ input, textarea {
   /* the parent */ }
   .programm_slider .slick-slide {
     margin: 0 1rem;
-    outline: none; }
-    .programm_slider .slick-slide > div:focus {
+    outline: none;
+    width: 25rem; }
+    .programm_slider .slick-slide > div:hover {
       outline: none; }
   .programm_slider .slick-list {
     margin: 0 0 0 4rem;
@@ -598,10 +623,10 @@ input, textarea {
     right: 1rem;
     transform: rotate(135deg); }
 
-.slider_item {
+.programm-list_item {
   position: relative;
   transition: .2s ease-out; }
-  .slider_item::before {
+  .programm-list_item::before {
     content: "";
     position: absolute;
     z-index: 1;
@@ -612,24 +637,24 @@ input, textarea {
     background-color: #111;
     opacity: 0;
     pointer-events: none; }
-  .slider_item:focus {
+  .programm-list_item:hover {
     transform: scale(1.25);
     z-index: 3;
     outline: none; }
-    .slider_item:focus::before {
+    .programm-list_item:hover::before {
       opacity: .5; }
-    .slider_item:focus .slider_item-desc {
+    .programm-list_item:hover .programm-list_item-desc {
       opacity: 1;
       border-radius: 1rem; }
-    .slider_item:focus .slider_item-image img {
+    .programm-list_item:hover .programm-list_item-image img {
       border-radius: 1rem; }
 
-.slider_item-image {
-  height: 16rem;
+.programm-list_item-image {
+  height: 14rem;
   position: relative;
   z-index: 2;
   overflow: hidden; }
-  .slider_item-image img {
+  .programm-list_item-image img {
     position: absolute;
     top: 0;
     left: 0;
@@ -637,11 +662,11 @@ input, textarea {
     height: 100%;
     object-fit: cover; }
 
-.slider_item-desc {
+.programm-list_item-desc {
   transition: .2s ease-out;
   position: absolute;
   z-index: 2;
-  padding: 2rem;
+  padding: 7%;
   display: flex;
   opacity: 0;
   flex-direction: column;
@@ -656,7 +681,7 @@ input, textarea {
   color: #fff;
   box-shadow: inset 0 -15rem 6rem 0 rgba(0, 0, 0, 0.6); }
 
-.slider_item-buttons a {
+.programm-list_item-buttons a {
   margin-right: 1rem; }
 
 .nowtv {
@@ -952,21 +977,144 @@ input, textarea {
   background-color: #50514d; }
   .programms h2 {
     color: #fff; }
+  .programms .programm-list_item {
+    width: 25rem;
+    margin-right: 1.2rem;
+    margin-top: 1.2rem; }
+    .programms .programm-list_item::before {
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      display: none; }
+    .programms .programm-list_item.modal-opened::before {
+      display: block;
+      opacity: .5; }
+    .programms .programm-list_item:hover {
+      transform: none; }
+      .programms .programm-list_item:hover .programm-list_item-image img {
+        border-radius: 0; }
+  .programms .programm-list_item-desc {
+    display: none; }
 
 .programms_wrapper {
-  padding-top: 2.5rem; }
+  padding-top: 2.5rem;
+  padding-right: 3.5rem; }
+  .programms_wrapper:last-child {
+    padding-bottom: 4.5rem; }
 
-.programms_list {
-  margin: auto; }
-
-.programms_item {
-  height: 14rem;
-  width: 25rem;
-  margin-right: 1.2rem;
-  margin-top: 1.2rem; }
-  .programms_item img {
+.programms_modal {
+  opacity: 0;
+  transition: .3s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  visibility: hidden; }
+  .programms_modal .modal-wrapper {
+    position: absolute;
     width: 100%;
     height: 100%; }
+  .programms_modal .modal-content {
+    position: absolute;
+    z-index: 15;
+    top: 50%;
+    left: calc(50% - 3.2rem);
+    transform: translate(-50%, calc(-50% - 1rem)) scale(1.4);
+    transition: .3s ease-out; }
+  .programms_modal .programm-list_item {
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0; }
+  .programms_modal .programm-list_item-desc {
+    display: flex;
+    opacity: 1; }
+  .programms_modal.opened {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible; }
+    .programms_modal.opened .modal-content {
+      transform: translate(-50%, -50%) scale(1.4); }
+
+.programms_list {
+  margin: auto;
+  position: relative; }
+
+.watch .programm {
+  padding: 0; }
+  .watch .programm .slick-slide {
+    width: 16.2rem;
+    margin: 0 .25rem; }
+  .watch .programm .slick-list {
+    margin: 0 4rem; }
+  .watch .programm .slick-arrow {
+    top: 50%; }
+  .watch .programm .slick-next {
+    transform: translateY(-50%) rotate(135deg); }
+  .watch .programm .slick-prev {
+    transform: translateY(-50%) rotate(-45deg); }
+  .watch .programm .programm-list_item-image {
+    height: 9rem; }
+  .watch .programm .programm-list_item-desc {
+    display: none; }
+  .watch .programm .programm-list_item:hover {
+    transform: none; }
+    .watch .programm .programm-list_item:hover::before {
+      display: none; }
+  .watch .programm .section-title {
+    display: none; }
+
+.selected-programm {
+  background-color: #e697e3;
+  color: #fff;
+  padding: 1.5rem 4rem; }
+
+.selected-programm_image {
+  width: 28rem;
+  height: 15rem; }
+  .selected-programm_image img {
+    width: 100%;
+    height: 100%; }
+
+.selected-programm_desc {
+  padding: 2rem; }
+
+.episodes {
+  background-color: #804284;
+  color: #fff;
+  padding: 2rem 0; }
+
+.episodes_list {
+  margin: 0 auto;
+  padding: 1.5rem 0; }
+
+.episode {
+  width: 19.5rem;
+  display: block;
+  margin: 0 1.2rem 1.2rem 0; }
+
+.episodes_list li:nth-child(4n) .episode {
+  margin-right: 0; }
+
+.episode_image {
+  width: 100%;
+  height: 11rem; }
+  .episode_image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; }
+
+.episode_title {
+  margin: 1rem 0 .7rem 0;
+  font-weight: bold;
+  max-height: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 * {
   margin: 0;
