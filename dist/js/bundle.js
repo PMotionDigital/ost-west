@@ -14007,9 +14007,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_components_modals_modal_login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/components/modals/modal-login */ "./src/js/parts/components/modals/modal-login.js");
 /* harmony import */ var _parts_components_modals_modal_register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/components/modals/modal-register */ "./src/js/parts/components/modals/modal-register.js");
 /* harmony import */ var _parts_pages_page_profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/pages/page-profile */ "./src/js/parts/pages/page-profile.js");
-/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/pages/page-programms */ "./src/js/parts/pages/page-programms.js");
+/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_7__);
 // files
 // import './parts/test';
 // //
@@ -14023,6 +14025,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // pages
+
 
 
 // blocks
@@ -14052,9 +14055,10 @@ let sliderProgramm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-slider
 
 sliderProgramm.slick({
     infinite: true,
-    focusOnSelect: true,
-    centerMode: true,
-    slidesToShow: 3,
+    //focusOnSelect: true,
+    //centerMode: true,
+    //slidesToShow: 3,
+    variableWidth: true,
     slidesToScroll: 1,
     arrows: true
 })
@@ -14296,6 +14300,45 @@ jQuery(function($){
 	});
 
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/pages/page-programms.js":
+/*!**********************************************!*\
+  !*** ./src/js/parts/pages/page-programms.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {const programmItem = $('.programms').find('.programm-list_item');
+const modalProgramm = $('[data-programms-modal]');
+const modalContent = $(modalProgramm).find('.modal-content');
+const modalWrapper = $(modalProgramm).find('.modal-wrapper');
+
+$(programmItem).on('click', function() {
+if(!modalProgramm.hasClass('opened')){
+    $(this).clone(true).unwrap().appendTo(modalContent);
+    modalProgramm.addClass('opened');
+    $('.programm-list_item').addClass('modal-opened');
+    modalProgramm.find('.programm-list_item').removeClass('modal-opened');
+    $('body').css('overflow', 'hidden');
+}
+})
+
+modalWrapper.on('click', function() {
+modalProgramm.removeClass('opened');
+$('.programm-list_item').removeClass('modal-opened');
+$('body').css('overflow', 'visible');
+setTimeout(()=> {
+    modalContent.html('');
+},200);
+})
+
+
+ 
+
+ 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
