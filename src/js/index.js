@@ -13,6 +13,7 @@ import './parts/components/modals/modal-register';
 // pages
 import './parts/pages/page-profile';
 import './parts/pages/page-programms';
+import './parts/pages/page-about';
 
 // blocks
 import './parts/components/block-programms';
