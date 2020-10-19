@@ -1,0 +1,96 @@
+.guide{
+    position: relative;
+}
+
+.guide_days{
+    padding: 0 .5rem;
+}
+
+.guide_days-button{
+    width: 1rem;
+    height: 1rem;
+    background-color: transparent;
+    border: .175rem solid $black;
+    border-bottom: none;
+    border-right: none;
+
+    &--prev{
+        transform: rotate(-45deg);
+    }
+    &--next{
+        transform: rotate(135deg);
+    }
+}
+
+.guide_days-item{
+    margin: 1.5rem 1rem;
+
+    button{
+        text-transform: uppercase;
+        font-size: 1.3rem;
+    }
+
+    &--current{
+        background-color:$purple;
+    }
+}
+
+
+
+.guide_programm{
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $white;
+    border-radius: 1.5rem;
+    padding: 2rem 4rem;
+    margin-bottom: 4rem;
+
+    &--current{
+        opacity: 1;
+        pointer-events: all;
+        position: relative;
+    }
+}
+
+.guide_list{
+    padding: 1rem 0;
+}
+
+.guide_list-section{
+    &--past{
+        opacity: 0.5;
+    }
+}
+
+.guide_list-item{
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    margin-left: 1rem;
+
+    .item_time{
+        color: $purple;
+        margin-right: 1.5rem;
+    }
+
+    .item_title{
+        font-size: 1.3rem;
+        padding-bottom: .5rem;
+    }
+
+    &--current{
+        background-color: $purple;
+        color: $white;
+
+        .item_time,
+        .button{
+            color: $white;
+        }
+
+        .button::after{
+            border-color: $white;
+        }
+    }
+}
