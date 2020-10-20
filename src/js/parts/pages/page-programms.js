@@ -14,12 +14,12 @@ if(!modalProgramm.hasClass('opened')){
 })
 
 modalWrapper.on('click', function() {
-modalProgramm.removeClass('opened');
-$('.programm-list_item').removeClass('modal-opened');
-$('body').css('overflow', 'visible');
-setTimeout(()=> {
-    modalContent.html('');
-},200);
+    modalProgramm.removeClass('opened');
+    $('.programm-list_item').removeClass('modal-opened');
+    $('body').css('overflow', 'visible');
+    setTimeout(()=> {
+        modalContent.html('');
+    },200);
 })
 
 

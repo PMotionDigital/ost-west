@@ -14009,9 +14009,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_pages_page_profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/pages/page-profile */ "./src/js/parts/pages/page-profile.js");
 /* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/pages/page-programms */ "./src/js/parts/pages/page-programms.js");
 /* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _parts_pages_page_about__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/pages/page-about */ "./src/js/parts/pages/page-about.js");
+/* harmony import */ var _parts_pages_page_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/pages/page-providers */ "./src/js/parts/pages/page-providers.js");
+/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/pages/page-guide */ "./src/js/parts/pages/page-guide.js");
+/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_10__);
 // files
 // import './parts/test';
 // //
@@ -14025,6 +14029,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // pages
+
+
+
 
 
 
@@ -14247,6 +14254,104 @@ noteFormClose.on('click', function() {
 
 /***/ }),
 
+/***/ "./src/js/parts/pages/page-about.js":
+/*!******************************************!*\
+  !*** ./src/js/parts/pages/page-about.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+let sliderFaces = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-slider-faces]');
+
+sliderFaces.slick({
+    infinite: true,
+    focusOnSelect: true,
+    centerMode: true,
+    variableWidth: true,
+    slidesToScroll: 1,
+    arrows: true
+})
+
+let slideCenter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-slider-faces] .slick-center');
+const sliderList = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.faces_list');
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(slideCenter).on('click', function(){
+    console.log("click");
+    if (!sliderList.hasClass('faces_list--opened')){
+        sliderList.addClass('faces_list--opened');
+    } else{
+        sliderList.removeClass('faces_list--opened');
+    }
+})
+
+
+
+/***/ }),
+
+/***/ "./src/js/parts/pages/page-guide.js":
+/*!******************************************!*\
+  !*** ./src/js/parts/pages/page-guide.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {const daysItem = $('[data-day-name]');
+const guideProgramm = $('[data-tab-name]');
+const daysButton = $('.guide_days-button');
+
+const programmClickHandler = function(currentDay){
+    $(guideProgramm).each(function (i, item){
+        if (currentDay.attr('data-day-name') === $(item).attr('data-tab-name')){
+            $('.guide_programm.guide_programm--current').removeClass('guide_programm--current');
+            $(item).addClass('guide_programm--current');
+        }
+    });
+}
+
+daysItem.on('click', function(evt){
+    evt.preventDefault();
+    $('.guide_days-item.guide_days-item--current').removeClass('guide_days-item--current');
+    $(this).addClass('guide_days-item--current');
+    const currentDay = $(this);
+
+    programmClickHandler(currentDay);
+})
+
+daysButton.on('click', function(evt){
+    evt.preventDefault();
+    let target = evt.target;
+
+    for (let i = 0; i < daysItem.length; i++){
+        let item = daysItem[i];
+        if (item.classList.contains('guide_days-item--current')){
+            item.classList.remove('guide_days-item--current');
+            if (target.classList.contains('guide_days-button--next') ){
+                daysItem[i+1].classList.add('guide_days-item--current');
+                i += 1;
+            }
+            if (target.classList.contains('guide_days-button--prev') ){
+                daysItem[i-1].classList.add('guide_days-item--current');
+                i -= 1;
+            }
+        }
+    }
+
+    const currentDay = $('.guide_days-item.guide_days-item--current');
+    programmClickHandler(currentDay);
+})
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
 /***/ "./src/js/parts/pages/page-profile.js":
 /*!********************************************!*\
   !*** ./src/js/parts/pages/page-profile.js ***!
@@ -14327,12 +14432,12 @@ if(!modalProgramm.hasClass('opened')){
 })
 
 modalWrapper.on('click', function() {
-modalProgramm.removeClass('opened');
-$('.programm-list_item').removeClass('modal-opened');
-$('body').css('overflow', 'visible');
-setTimeout(()=> {
-    modalContent.html('');
-},200);
+    modalProgramm.removeClass('opened');
+    $('.programm-list_item').removeClass('modal-opened');
+    $('body').css('overflow', 'visible');
+    setTimeout(()=> {
+        modalContent.html('');
+    },200);
 })
 
 
@@ -14340,6 +14445,38 @@ setTimeout(()=> {
 
  
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/pages/page-providers.js":
+/*!**********************************************!*\
+  !*** ./src/js/parts/pages/page-providers.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+let sliderProviders = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-slider-providers]');
+
+sliderProviders.slick({
+    infinite: false,
+    slidesToShow:5,
+    variableWidth: true,
+    slidesToScroll: 1,
+    arrows: true
+})
+
+
+
+
 
 /***/ }),
 
