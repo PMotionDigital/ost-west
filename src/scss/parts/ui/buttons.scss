@@ -21,6 +21,7 @@ button{
     background-color: $purple;
     transition: all .25s ease-in-out;
     text-decoration: none;
+    position: relative;
     cursor: pointer;
     &.type-1 {
         background-color: transparent;
@@ -35,5 +36,31 @@ button{
     &.loading {
         color: transparent;
         background-image: url(../img/loader.svg);
+    }
+    &.detail{
+        background-color: transparent;
+        color: $purple;
+        padding: 0;
+
+        &::after{
+            position: absolute;
+            content: "";
+            top: 50%;
+            right: -.5rem;
+            transform: translateY(-25%) rotate(45deg);
+            width: .25rem;
+            height: .25rem;
+            border: .125rem solid $purple;
+            border-left: none;
+            border-bottom: none;
+            background-color: transparent;
+        }
+    }
+    &.disabled {
+        opacity: .4;
+        pointer-events: none;
+        &::selection {
+            background: none;
+        }
     }
 }

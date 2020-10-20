@@ -6,7 +6,7 @@
     $user_info = get_userdata($cur_user_id);
 ?>
 <div class="user-stat_pic">
-    <img src="<?php echo get_avatar_url( $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
+    <img src="<?php echo get_field('аватар_пользователя', 'user_'. $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
 </div>
 <div class="user-stat_name">
     <?php

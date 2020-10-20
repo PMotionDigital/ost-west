@@ -3,14 +3,18 @@ import countrySelect from 'country-select-js';
 
 jQuery(function($){
 
+    const noteForm = $('.note-form');
+    const noteFormText = noteForm.find('.note-form_text');
 	const profileForm = $('#data-fields_form');
     const profileFormBtn = profileForm.find('.button');
+    const profileFormInputs = profileForm.find('input');
     const headeruserName = $('.user-stat_name');
     const userCountrySelect = $('[data-user-country-select]');
     const userCountryInput = $('[data-user-country-input]');
-    const fileBtn = profileForm.find('input[type="file"]');
-  
+    const fileBtn = $('.acf-basic-uploader');
+    const acfSubmit = $('.acf-button');
 
+    let picUploaded = false;
     let currentSlug = userCountryInput.attr('data-user-country-input'); 
 
     // акитвируем плагин на выбор страны 
@@ -30,6 +34,17 @@ jQuery(function($){
         },50);
     });
 
+    // убираем класс disabled с кнопки отправки формы, если мы чет меняли
+
+    profileFormInputs.on('input', function() {
+        profileFormBtn.removeClass('disabled');
+    });
+
+    fileBtn.on('change', function() {
+        profileFormBtn.removeClass('disabled');
+        picUploaded = true;
+    });
+
     // заменяем стандартную кнопку файла через обработчик
 
     $('.pic-wrap_text').on('click', function() {
@@ -41,14 +56,13 @@ jQuery(function($){
 
         e.preventDefault();
 
-        let uploaded = fileBtn.prop('files')[0];
         let formData = new FormData();
+
         profileForm.serializeArray().forEach((el) => {
             formData.append(el.name, el.value);
         });
 
-        formData.append('action', 'update_user_profile');
-        formData.append('file', uploaded);
+        formData.append('action', 'update_user_profile')
 
 		$.ajax({
             type: 'POST',
@@ -62,14 +76,26 @@ jQuery(function($){
             success: (response) => {
                 let jsonOutput = JSON.parse(response);
                 let userFirstName = jsonOutput.name;
+                let outputError = jsonOutput.error;
 
-                console.log(jsonOutput);
+                console.log(outputError);
 
-                fileBtn.val('');
+                noteFormText.html('');
+                noteForm.addClass('open');
+
+                if(outputError.length == 0) {
+                    noteFormText.html('Изменения успешно сохранены!');
+                } else {
+                    noteFormText.html(outputError);
+                }
 
                 headeruserName.html(userFirstName);
                 profileFormBtn.removeClass('loading');
-                
+                profileFormBtn.addClass('disabled');
+
+                if(picUploaded == true) {
+                    acfSubmit.trigger('click');
+                }
             }
         });
 

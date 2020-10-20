@@ -13,136 +13,33 @@
                 </div>
             </div>
             <div class="programms_list dis-flex flex-wrap-wrap col-lg-11">
+                <?php
+                $posts = get_posts(array(
+                    'posts_per_page'	=> -1,
+                    'post_type'			=> 'post',
+                    'category_name'		=> 'nashi-programmy'
+                ));
+
+                if ($posts) :
+                    foreach ($posts as $post) :
+                        setup_postdata($post);
+                ?>
                 <button type="button" class="programm-list_item">
                     <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+                        <?php the_post_thumbnail(); ?>
                     </div>
                     <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
+                        <h3><?php the_title(); ?></h3>
+                        <?php the_excerpt(); ?>
                         <div class="programm-list_item-buttons">
                             <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
+                            <a href="<?php the_permalink(); ?>" class="button type-2">Эпизоды</a>
                         </div>
                     </div>
                 </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
+                <?php endforeach; ?>
+				<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
             </div>
         </div>
         <div class="programms_wrapper">
@@ -154,71 +51,33 @@
                 </div>
             </div>
             <div class="programms_list dis-flex flex-wrap-wrap col-lg-11">
-            <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
+            <?php
+                $posts = get_posts(array(
+                    'posts_per_page'	=> -1,
+                    'post_type'			=> 'post',
+                    'category_name'		=> 'nashi-reportazhi'
+                ));
+
+                if ($posts) :
+                    foreach ($posts as $post) :
+                        setup_postdata($post);
+                ?>
                 <button type="button" class="programm-list_item">
                     <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+                        <?php the_post_thumbnail(); ?>
                     </div>
                     <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
+                        <h3><?php the_title(); ?></h3>
+                        <?php the_excerpt(); ?>
                         <div class="programm-list_item-buttons">
                             <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
+                            <a href="<?php the_permalink(); ?>" class="button type-2">Эпизоды</a>
                         </div>
                     </div>
                 </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
-                <button type="button" class="programm-list_item">
-                    <div class="programm-list_item-image">
-                        <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
-                    </div>
-                    <div class="programm-list_item-desc text-block">
-                        <h3>"По-русски с немецким акцентом"</h3>
-                        <p>Авторская программа Бориса Райтшустера. Интервью с экспертом на острые политические темы.</p>
-                        <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="#" class="button type-2">Эпизоды</a>
-                        </div>
-                    </div>
-                </button>
+                <?php endforeach; ?>
+				<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
             </div>
         </div>
     </section>

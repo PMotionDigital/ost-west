@@ -36,7 +36,10 @@
 			</div>
 		</div>
 	</footer>
-	<div class="note-form"><span class="note-form_close"></span></div>
+	<div class="note-form">
+		<span class="note-form_close"></span>
+		<div class="note-form_text"></div>
+	</div>
 	<?php get_template_part('templates/parts/modals/modal-login'); ?>
 	<?php get_template_part('templates/parts/modals/modal-register'); ?>
 	<?php wp_footer(); ?>

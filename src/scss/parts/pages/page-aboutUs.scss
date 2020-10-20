@@ -1,0 +1,321 @@
+.about-us{
+    background-color: $white;
+}
+
+
+// Intro
+
+.intro{
+    background: url("https://liveberlin.ru/wp-content/uploads/2016/12/Berlin_Panorama_Mitte-cover.jpg") 0 0 no-repeat;
+    background-size: 100%;
+    padding: 5rem 0;
+    color: $white;
+}
+
+.intro_title{
+    margin: 0 auto;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.intro_desc{
+    margin: 0 auto;
+
+    p{
+        padding-right: 3.5rem;
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+
+
+//Partners
+
+.partners{
+    margin: 0 auto;
+    padding: 1rem 0;
+    align-items: center;
+
+    h2{
+        margin-right: 3rem;
+    }
+}
+
+.partners_list-item{
+    margin: 0 1.5rem;
+
+
+    a{
+        display: block;
+        height: 3rem;
+    }
+
+    img{
+        height: 100%;
+        width: auto;
+    }
+}
+
+
+
+
+//Faces
+
+
+.faces{
+    background-color: $purple;
+    color: $white;
+}
+
+.faces_title{
+    margin: 0 auto;
+    padding: 1.7rem 0;
+}
+
+.faces_list{
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    position: relative;
+
+
+
+
+    // Slider
+
+    .slick-arrow{
+        width: 50px;
+        height: 50px;
+        &::before{
+            content:"";
+            opacity: 1;
+            font-size: 0;
+            background-color:transparent;
+            padding: 6px;
+            border: 3px solid $white;
+            border-right: none;
+            border-bottom: none; 
+        }
+    }
+
+    .slick-prev{
+        left: -3rem;
+        z-index: 1;
+        transform: translateY(-50%) rotate(-45deg);
+    }
+    .slick-next{
+        right: -3rem;
+        transform: translateY(-50%) rotate(135deg);
+    }
+
+    .slick-slide{
+        margin: 0 1rem;
+        min-width: 13rem;
+    }
+    .slick-track{
+        padding: 5rem 1rem 10rem 1rem;
+    }
+
+    .slick-list{
+        overflow-x: hidden;
+    }
+
+    .slick-center{
+        cursor: pointer;
+        z-index: 3;
+        .faces_list-item{
+            transform: scale(1.5);
+            z-index: 10;
+
+            img{
+                z-index: 10;
+            }
+
+            &::before{
+                opacity: 0;
+            }
+        }
+        
+        .faces_list-desc{
+            opacity: 1;
+        }
+        .faces_list-about{
+            opacity: 0;
+        }
+    }
+}
+
+
+
+.faces_list--opened{
+    width: calc(50% + 22rem);
+
+    .slick-center{
+        width: 31rem;
+        height: auto; 
+        margin: 0 5rem;
+        .faces_list-item{
+            background-color: $white;
+            display: flex !important;
+            height: max-content;
+            img{
+                position: static;
+                width: 13rem;
+                height: auto;
+            }
+        }
+        .faces_list-desc{
+            position: static;
+            text-align: left;
+            padding: 1.8rem;
+            width: 18rem;
+            color: $black;
+        }
+        .faces_list-post{
+            margin: .5rem 0;
+        }
+        .faces_list-post,
+        .faces_list-about{
+            font-size: .8rem;
+        }
+        .faces_list-about{
+            opacity: 1;
+        }
+    }
+}
+
+
+
+.faces_list-item{
+    height: 18rem;
+    width: 10rem;
+    position: relative;
+    z-index: -1;
+    transition: .3s ease-out;
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &::before{
+        content:"";
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: $black;
+        opacity: 0.5;
+    }
+}
+
+.faces_list-desc{
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0; 
+    text-align: center;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.faces_list-name{
+    font-size: 1.5rem;
+}
+
+
+
+
+//Services 
+
+.services{
+    background-color: $greyLight;
+    padding: 2rem 4rem 5rem 4rem;
+}
+
+.services_title{
+    padding-bottom: 1.5rem;
+}
+
+.services_desc{
+    padding-right: 3.5rem;
+    font-size: 1.2rem;
+}
+
+.services_about{
+    p{
+        margin-bottom: 1rem;
+    }
+
+    ul{
+        margin-bottom: 2rem;
+        li{
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+.services_contacts{
+    color: $grey;
+    padding-right: 7rem;
+}
+
+
+
+//Form
+
+.services_form-section{
+    margin-left: 8rem;
+    padding: 2rem;
+    background-color: $white;
+    border-radius: 1rem;
+    width: 29rem;
+    display: table;
+
+    input{
+        display: block;
+        width: 100%;
+        margin-bottom: .5rem;
+        border-radius: .25rem;
+        padding: 1.15rem 2.25rem;
+    }
+
+    textarea{
+        width: 100%;
+        margin-bottom: 1.25rem;
+        border-radius: .25rem;
+        padding: 1.15rem 2.25rem;
+        height: 3.5rem;
+        resize: none;
+    }
+
+    input[type=submit]{
+        background-color: $purple;
+        color: $white;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+
+    input:focus,
+    textarea:focus,
+    input:active{
+        outline: none;
+    }
+}
+
+.services_form-title{
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0 2.5rem;
+    margin-bottom: 1.5rem;
+
+    a{
+        color: $black;
+        text-decoration: none;
+    }
+}

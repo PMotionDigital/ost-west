@@ -17,7 +17,6 @@ $cur_user_id = get_current_user_id();
                     <div class="data-fields_pic-wrap">
                         <img src="<?php echo get_field('аватар_пользователя', 'user_'. $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
                     </div>
-                    <input style="display:none;" type="file" name="user-avatar"  accept="image/*" />
                     <div class="pic-wrap_text">Загрузить фото</div>
                 </div>
                 
@@ -35,7 +34,7 @@ $cur_user_id = get_current_user_id();
                     <input placeholder="e-mail адрес" type="text" name="user-email" value="<?php the_author_meta( 'user_email', $current_user->ID ); ?>">
                 </div>
                 <input type="hidden" name="user-id" data-user-id="<?php echo $current_user->ID; ?>" value="<?php echo $current_user->ID; ?>">
-                <button class="button col-lg-12" type="submit">Сохранить</button>
+                <button class="button col-lg-12 disabled" type="submit">Сохранить</button>
             </form>
         </div>
         <div class="user-info_subscribe">
