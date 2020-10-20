@@ -4,14 +4,15 @@
 
 .main-header{
     background-color: $white;
+    
 }
 
 
 // Header top
 
 .header-top {
-    padding: 1rem 0;
     background-color: $white;
+    padding: 1rem 0;
 }
 
 .header-top_logo {
@@ -47,7 +48,6 @@
 
 .main-nav {
     background-color: $purple;
-    padding: .75rem 0;
 }
 
     // Header menu
@@ -56,13 +56,44 @@
     list-style: none;
 }
 
-.page_item {
+.menu-item {
     &:not(:last-child) {
-        margin-right: 1.75rem;
+        a {
+            padding-right: 1.75rem;
+        }
+    }
+    &:last-child {
+        a {
+            &:after {
+                content: '';
+                width: calc(100% + 2rem);
+            }
+        }
     }
     a {
         color: $white;
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        position: relative;
         text-decoration: none;
+        font-size: .85rem;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -1rem;
+            height: 100%;
+            width: 100%;
+            background-color: rgba($white, .1);
+            transition: all .25s ease-in-out;
+            opacity: 0;
+        }
+        &:hover {
+            &:after {
+                opacity: 1;
+            }
+        }
     }
 }
 
@@ -72,6 +103,7 @@
     justify-content: flex-end;
     a {
         text-decoration: none;
+        padding: 0;
     }
 }
 
@@ -92,6 +124,7 @@
 .user-stat {
     display: flex;
     align-items: center;
+    
     .user-stat_pic {
         width: 2rem;
         height: 2rem;
@@ -109,7 +142,7 @@
         }
     }
     .user-stat_name {
-        font-size: 1.1rem;
+        font-size: .85rem;
         color: $white;
     }
 }

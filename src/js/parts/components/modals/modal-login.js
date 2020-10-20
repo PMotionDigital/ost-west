@@ -40,6 +40,11 @@ jQuery(function($){
 
                 formBtn.removeClass('loading');
                 
+                setTimeout(function(){
+                    window.location.href = '/profile/';
+                }, 1000);
+                
+
             }
         });
 

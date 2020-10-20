@@ -49,7 +49,7 @@
         <div class="main-header_nav main-nav col-lg-12 dis-flex justify-content-center">
             <div class="col-lg-11 dis-flex align-items-center justify-content-between">
                 <?php wp_nav_menu([
-                    'theme_location'  => 'primary',
+                    'theme_location'  => 'top',
                     'container'       => 'ul',
                     'menu_class'      => 'main-nav_menu nav-menu',
                 ]); ?>
@@ -57,7 +57,7 @@
                     <div class="nav-meta_item-search">
                         <button data-search-button></button>
                     </div>
-                    <a href="/profile/" class="nav-meta_item-user user-stat">
+                    <a href="/profile/" class="nav-meta_item-user page_item user-stat">
                         <?php 
                             get_template_part('templates/parts/header/header-user'); 
                         ?>

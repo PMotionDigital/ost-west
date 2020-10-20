@@ -12,15 +12,23 @@ $cur_user_id = get_current_user_id();
             <div class="section-title type-1">
                 <h2>Профиль</h2>
             </div>
-            <form class="data-fields_form" id="data-fields_form" action="update_user_profile" method="post">
+            <form class="data-fields_form" id="data-fields_form" action="update_user_profile" method="post" enctype="multipart/form-data">
                 <div class="data-fields_pic data-fields_wrap">
                     <div class="data-fields_pic-wrap">
-                        <img src="<?php echo get_avatar_url( $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
+                        <img src="<?php echo get_field('аватар_пользователя', 'user_'. $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
                     </div>
+                    <input style="display:none;" type="file" name="user-avatar"  accept="image/*" />
+                    <div class="pic-wrap_text">Загрузить фото</div>
+                </div>
+                
+                <div class="data-fields_input data-fields_wrap">
+                    <input placeholder="Ваше имя и фамилия" type="text" name="first-name" value="<?php the_author_meta( 'first_name', $current_user->ID ); ?>">
                 </div>
 
                 <div class="data-fields_input data-fields_wrap">
-                    <input placeholder="Ваше имя и фамилия" type="text" name="first-name" value="<?php the_author_meta( 'first_name', $current_user->ID ); ?>">
+                    <input data-user-country-select type="text">
+				    <label for="country_selector" style="display:none;">Select a country here...</label>
+                    <input data-user-country-input="<?php echo get_field('выбор_страны', 'user_'. $current_user->ID ); ?>" type="hidden" name="user-country" value="<?php echo get_field('выбор_страны', 'user_'. $current_user->ID ); ?>">
                 </div>
 
                 <div class="data-fields_input data-fields_wrap">
@@ -35,6 +43,10 @@ $cur_user_id = get_current_user_id();
                 <h2>Профиль</h2>
             </div>
             <div class="tariff-list">
+                <?php 
+                   // echo do_shortcode('[wp_paypal button="buynow" product_name="test" prod_type="tariff_1"]');
+                    //echo do_shortcode('[sofort_button prod_type="tariff_1"]');
+                ?>
                 <?php if(have_rows('список_тарифов', 'option')): ?>
 	            <?php while(have_rows('список_тарифов', 'option')): the_row(); ?>  
                 <div class="tariff-list_item tariff-item">
@@ -98,32 +110,18 @@ $cur_user_id = get_current_user_id();
     <?php } else {
         wp_redirect( '/' );
     } ?>
-
-
-    <!-- 
-    <?php
-        $cur_user_id = get_current_user_id();
-        $user_image = get_field('аватарка', 'user_'. $cur_user_id );
-        $user_text = get_field('какой-то_текст', 'user_'. $cur_user_id );
-    ?>
-    <?php
-    if (is_user_logged_in()) {
-    global $current_user;
+</section>
+<div style="display:none;">
+<?php
     $user = wp_get_current_user();
     $role = ( array )$user->roles;
     $role = $role[0];
-        if ($role === "subscriber") {
-            $options = array(
-            'post_id' => 'user_' . $current_user->ID,
-            'field_groups' => array(5) ,
-            'submit_value' => 'Update Profile 123123'
-            );
-            acf_form($options);
-        }        
-    }
+    $options = array(
+    'post_id' => 'user_' . $current_user->ID,
+    'field_groups' => array(5) ,
+    'submit_value' => 'Update'
+    );
+    acf_form($options);       
     ?>
-    <img src="<?php echo $user_image; ?>">
-    <p><?php echo $user_text; ?></p> -->
-</section>
-
+</div>
 <?php get_footer(); ?>

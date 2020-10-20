@@ -9,7 +9,12 @@
     <img src="<?php echo get_avatar_url( $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
 </div>
 <div class="user-stat_name">
-    <?php the_author_meta( 'first_name', $current_user->ID ); ?>
+    <?php
+        $myvalue = get_the_author_meta( 'first_name', $current_user->ID );
+        $arr = explode(' ',trim($myvalue));
+        
+        echo $arr[0]; // will print Test  
+    ?>
 </div>
 <?php } else { ?>
 <button class="button" data-modal-btn="login">Войти</button>

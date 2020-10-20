@@ -22,6 +22,9 @@
     padding: 2rem;
     background-color: $white;
     border-radius: $mainBorderRadius;
+    .country-select {
+        width: 100%;
+    }
 }
 
 .data-fields_wrap {
@@ -33,6 +36,8 @@
 .data-fields_pic {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     .data-fields_pic-wrap {
         width: 8rem;
         height: 8rem;
@@ -45,8 +50,20 @@
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
+}
+
+.pic-wrap_text {
+    text-align: center;
+    display: block;
+    color: #804284;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1.1rem;
 }
 
 // столбец с выбором подписки
@@ -112,6 +129,8 @@
 .user-info_logout {
     grid-column: 6/7;
     a {
+        text-align: right;
+        display: block;
         color: $purple;
         font-weight: bold;
         text-decoration: none;
