@@ -43,8 +43,8 @@ $cur_user_id = get_current_user_id();
             </div>
             <div class="tariff-list">
                 <?php 
-                   // echo do_shortcode('[wp_paypal button="buynow" product_name="test" prod_type="tariff_1"]');
-                    //echo do_shortcode('[sofort_button prod_type="tariff_1"]');
+                    echo do_shortcode('[wp_paypal button="buynow" product_name="test" prod_type="tariff_1"]');
+                    echo do_shortcode('[sofort_button prod_type="tariff_1"]');
                 ?>
                 <?php if(have_rows('список_тарифов', 'option')): ?>
 	            <?php while(have_rows('список_тарифов', 'option')): the_row(); ?>  
