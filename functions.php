@@ -55,7 +55,9 @@ if (function_exists('acf_add_options_page')) {
 include 'functions/func-login.php';
 include 'functions/func-register.php';
 
-// custom gutenberg blocks
+// online stream func
+
+
 
 
 // автообновление версии файлов
