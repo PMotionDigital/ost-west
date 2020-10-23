@@ -21,6 +21,6 @@
     if(is_subscribe_work($user_id)) {
         get_template_part('templates/parts/online-stream');
     } else {
-        echo 'nu pizda';
+        echo 'net podpiski';
     }
 ?>

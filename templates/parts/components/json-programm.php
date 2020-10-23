@@ -22,7 +22,7 @@
             }
             $new_data[] = $new_item;
         }
-    }
+    } 
 
     foreach($new_data as $programm_item) {
         $programm_date[] = $programm_item['Дата'];
@@ -31,9 +31,6 @@
     }
 
     // set $vars
-
-    set_query_var('programm_time', $programm_time);
-    set_query_var('programm_date', $programm_date);
     set_query_var('data', $new_data);
 
 ?>

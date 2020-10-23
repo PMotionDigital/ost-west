@@ -6,26 +6,28 @@
         <div class="nowtv_list">
             <?php 
                 $cur_date = current_time('d.m.Y');
-                $cur_time = current_time('H:i:s');
+                $cur_time = current_time('H:i');
 
                 get_template_part('templates/parts/components/json-programm'); 
 
-                $programm_date = get_query_var('programm_date');
-                $programm_time = get_query_var('programm_time');
-                $programm_name = get_query_var('programm_name');
-                $data = get_query_var('data');
+                $programm_data = get_query_var('data');
 
             ?>
 
             <?php 
-                foreach($data as $date) {
-                    if($cur_date == $date['Дата']) { 
+                $first_item = 0;
+                foreach($programm_data as $count => $programm_item) {
+                    if( $cur_date == $programm_item['Дата'] && ($cur_time <= date( 'H:i', strtotime($programm_data[$count+1]['Время']))) ) { 
             ?>
-                    <div class="nowtv_list-item">
-                        <?php print_r( date( 'H:i', strtotime($date['Время']) ) ); ?>
+                    <div class="nowtv_list-item <?php 
+                    if($first_item == 0) { echo 'nowtv_list-item--active'; }?>">
+                        <?php print_r( date( 'H:i', strtotime($programm_item['Время']) ) ); ?>
+                        <?php echo $programm_item['Название фильма']; ?>
                     </div>        
-            <?php        
+            <?php       
+                    $first_item++; 
                     }
+                   
                 } 
             ?>
         </div>
