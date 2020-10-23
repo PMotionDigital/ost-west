@@ -14,6 +14,14 @@ include 'functions/func-profile.php';
 
 include 'functions/func-users.php';
 
+// table press json output
+
+add_filter( 'tablepress_table_output', 'mjharris2407_tablepress_json_output', 10, 3 );
+function mjharris2407_tablepress_json_output( $output, $table, $render_options ) {
+  
+  return json_encode($table['data']);
+}
+
 // settings site
 
 if (function_exists('acf_add_options_page')) {

@@ -78,7 +78,7 @@ jQuery(function($){
                 let userFirstName = jsonOutput.name;
                 let outputError = jsonOutput.error;
 
-                console.log(outputError);
+                //console.log(outputError);
 
                 noteFormText.html('');
                 noteForm.addClass('open');

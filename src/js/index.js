@@ -10,6 +10,9 @@ import './parts/components/modals/modals';
 import './parts/components/modals/modal-login';
 import './parts/components/modals/modal-register';
 
+// header
+import './parts/components/header/header-mobile';
+
 // pages
 import './parts/pages/page-profile';
 import './parts/pages/page-programms';

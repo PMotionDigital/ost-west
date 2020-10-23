@@ -10,12 +10,12 @@ function pt_login_member() {
 
 		// Check CSRF token
 		if( !check_ajax_referer( 'ajax-login-nonce', 'login-security', false) ){
-			$error[] = __('Session token has expired, please reload the page and try again', 'ptheme');
+			$error[] = __('Ваш сеанс завершился, перезагрузите страницу', 'ptheme');
 		}
 	 	
 	 	// Check if input variables are empty
 	 	elseif( empty($user_login) || empty($user_pass) ){
-			$error[] = __('Please fill all form fields', 'ptheme');
+			$error[] = __('Заполнител все поля', 'ptheme');
 	 	} else { // Now we can insert this account
 
 	 		$user = wp_signon( array('user_login' => $user_login, 'user_password' => $user_pass), false );

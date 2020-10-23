@@ -1,12 +1,17 @@
-@import '../vars.scss';
-
 .main-post {
     position: relative;
     border-radius: $mainBorderRadius;
     overflow: hidden;
     background-color: $white;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
+    color: inherit;
+    &:not(&--important):hover {
+        .main-post_title {
+            color: $purple;
+        }
+    }
 }
 
 .main-post_desc {
@@ -16,6 +21,7 @@
 .main-post_image {
     position: relative;
     overflow: hidden;
+    min-height: 35vh;
     img {
         position: absolute;
         top: 0;
@@ -28,6 +34,7 @@
 
 .main-post_title {
     font-size: 1.5rem;
+    transition: all .25s ease-in-out;
 }
 
 .main-post_date {
@@ -46,4 +53,8 @@
     .main-post_excerpt {
         color: $white;
     }
+}
+
+@media only screen and (max-width: 768px) {  
+    
 }

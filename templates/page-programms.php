@@ -26,7 +26,14 @@
                 ?>
                 <button type="button" class="programm-list_item">
                     <div class="programm-list_item-image">
-                        <?php the_post_thumbnail(); ?>
+                        <?php 
+                            if(get_the_post_thumbnail_url()) {
+                                $post_image = get_the_post_thumbnail_url();
+                            } else {
+                                $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
+                            }
+                        ?>
+                        <img src="<?php echo $post_image; ?>">
                     </div>
                     <div class="programm-list_item-desc text-block">
                         <h3><?php the_title(); ?></h3>
@@ -64,7 +71,14 @@
                 ?>
                 <button type="button" class="programm-list_item">
                     <div class="programm-list_item-image">
-                        <?php the_post_thumbnail(); ?>
+                        <?php 
+                            if(get_the_post_thumbnail_url()) {
+                                $post_image = get_the_post_thumbnail_url();
+                            } else {
+                                $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
+                            }
+                        ?>
+                        <img src="<?php echo $post_image; ?>">
                     </div>
                     <div class="programm-list_item-desc text-block">
                         <h3><?php the_title(); ?></h3>

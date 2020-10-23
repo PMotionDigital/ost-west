@@ -1,0 +1,56 @@
+.single-post_wrap {
+    display: grid;
+    grid-template-columns: repeat(8,8fr);
+    grid-gap: 1rem;
+    margin-top: 3rem;
+}
+
+.single-post_content {
+    grid-column: 1/6;
+    padding: 4rem 3rem;
+    background-color: $white;
+    border-radius: 10px;
+}
+
+.single-post_title {
+    font-size: 2.5rem;
+}
+
+.single-post_date {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.single-post_image {
+    margin-bottom: 2rem;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.single-post_sidebar {
+    grid-template-columns: 6/8;
+}
+
+// правила стилизации для gutenberg
+
+.single-post_val {
+    a {
+        color: $purple;
+        border-bottom: 2px solud rgba($purple, .5);
+        transition: all .25s ease-in-out;
+        &:hover {
+            border-color: transparent;
+        }
+    }
+}
+
+.wp-block-embed {
+    &__wrapper {
+        padding: 1rem;
+        color: $purple;
+        border: 2px solid $purple;
+        background-color: rgba($purple, .015);
+    }
+}

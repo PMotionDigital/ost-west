@@ -3,6 +3,7 @@ import $ from "jquery";
 jQuery(function($){
 
     const noteForm = $('.note-form');
+    const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
 
@@ -32,18 +33,19 @@ jQuery(function($){
                 let jsonOutput = JSON.parse(response);
                 let respMessage = jsonOutput.error;
 
-                noteForm.html('');
+                noteFormText.html('');
                 noteForm.addClass('open');
-                noteForm.html(respMessage);
 
-                console.log(jsonOutput);
+                if(respMessage.length == 0) {
+                    noteFormText.html('Изменения успешно сохранены!');                    
+                    setTimeout(function(){
+                        window.location.href = '/profile/';
+                    }, 1000);
+                } else {
+                    noteFormText.html(respMessage);
+                }
 
-                formBtn.removeClass('loading');
-                
-                setTimeout(function(){
-                    window.location.href = '/profile/';
-                }, 1000);
-                
+                formBtn.removeClass('loading');                
 
             }
         });

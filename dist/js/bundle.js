@@ -15357,16 +15357,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_components_modals_modals__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_components_modals_modals__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _parts_components_modals_modal_login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/components/modals/modal-login */ "./src/js/parts/components/modals/modal-login.js");
 /* harmony import */ var _parts_components_modals_modal_register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/components/modals/modal-register */ "./src/js/parts/components/modals/modal-register.js");
-/* harmony import */ var _parts_pages_page_profile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/pages/page-profile */ "./src/js/parts/pages/page-profile.js");
-/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/pages/page-programms */ "./src/js/parts/pages/page-programms.js");
-/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _parts_pages_page_about__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/pages/page-about */ "./src/js/parts/pages/page-about.js");
-/* harmony import */ var _parts_pages_page_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/pages/page-providers */ "./src/js/parts/pages/page-providers.js");
-/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/pages/page-guide */ "./src/js/parts/pages/page-guide.js");
-/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
-/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _parts_components_header_header_mobile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/components/header/header-mobile */ "./src/js/parts/components/header/header-mobile.js");
+/* harmony import */ var _parts_pages_page_profile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/pages/page-profile */ "./src/js/parts/pages/page-profile.js");
+/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/pages/page-programms */ "./src/js/parts/pages/page-programms.js");
+/* harmony import */ var _parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_programms__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _parts_pages_page_about__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./parts/pages/page-about */ "./src/js/parts/pages/page-about.js");
+/* harmony import */ var _parts_pages_page_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./parts/pages/page-providers */ "./src/js/parts/pages/page-providers.js");
+/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./parts/pages/page-guide */ "./src/js/parts/pages/page-guide.js");
+/* harmony import */ var _parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_parts_pages_page_guide__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
+/* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_11__);
 // files
 // import './parts/test';
 // //
@@ -15377,6 +15378,9 @@ __webpack_require__.r(__webpack_exports__);
 // modals 
 
 
+
+
+// header
 
 
 // pages
@@ -15419,7 +15423,51 @@ sliderProgramm.slick({
     //variableWidth: true,
     slidesToScroll: 1,
     arrows: true,
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: "unslick"
+        },
+        {
+            breakpoint: 600,
+            settings: "unslick"
+        },
+        {
+            breakpoint: 480,
+            settings: "unslick"
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+    ]
 })
+
+/***/ }),
+
+/***/ "./src/js/parts/components/header/header-mobile.js":
+/*!*********************************************************!*\
+  !*** ./src/js/parts/components/header/header-mobile.js ***!
+  \*********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const headerMobClose = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-mobile-header-close]')
+const headerMob = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.header-mobile-nav');
+const headerMobBurg = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-header-burger]');
+
+headerMobBurg.on('click', function() {
+    headerMob.addClass('open');
+});
+
+headerMobClose.on('click', function() {
+    headerMob.removeClass('open');
+});
 
 /***/ }),
 
@@ -15439,6 +15487,7 @@ __webpack_require__.r(__webpack_exports__);
 jQuery(function($){
 
     const noteForm = $('.note-form');
+    const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
 
@@ -15468,18 +15517,19 @@ jQuery(function($){
                 let jsonOutput = JSON.parse(response);
                 let respMessage = jsonOutput.error;
 
-                noteForm.html('');
+                noteFormText.html('');
                 noteForm.addClass('open');
-                noteForm.html(respMessage);
 
-                console.log(jsonOutput);
+                if(respMessage.length == 0) {
+                    noteFormText.html('Изменения успешно сохранены!');                    
+                    setTimeout(function(){
+                        window.location.href = '/profile/';
+                    }, 1000);
+                } else {
+                    noteFormText.html(respMessage);
+                }
 
-                formBtn.removeClass('loading');
-                
-                setTimeout(function(){
-                    window.location.href = '/profile/';
-                }, 1000);
-                
+                formBtn.removeClass('loading');                
 
             }
         });
@@ -15801,7 +15851,7 @@ jQuery(function($){
                 let userFirstName = jsonOutput.name;
                 let outputError = jsonOutput.error;
 
-                console.log(outputError);
+                //console.log(outputError);
 
                 noteFormText.html('');
                 noteForm.addClass('open');

@@ -1,5 +1,5 @@
 <section class="programm">
-    <div class="dis-flex justify-content-center">
+    <div class="dis-flex justify-content-center col-xs-12">
         <div class="col-lg-11">
             <div class="section-title type-1">
                 <h2>Наши программы</h2>
@@ -13,7 +13,14 @@
         <?php foreach($featured_posts as $item) { ?>
         <button type="button" class="programm-list_item">
             <div class="programm-list_item-image">
-                <img src="">
+                <?php 
+                    if(get_the_post_thumbnail_url()) {
+                        $post_image = get_the_post_thumbnail_url();
+                    } else {
+                        $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
+                    }
+                 ?>
+                <img src="<?php echo $post_image; ?>">
             </div>
             <div class="programm-list_item-desc text-block">
                 <h3><?php echo get_the_title($item); ?></h3>

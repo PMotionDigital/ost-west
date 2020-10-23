@@ -26,6 +26,12 @@
     justify-content: flex-end;
 }
 
+.socials-list_item {
+    &:not(:last-child) {
+        margin-right: .5rem;
+    }
+}
+
 .socials-list_item a{
     display: flex;
     width: 2.3rem;
@@ -34,7 +40,6 @@
     background-color: $purple;
     justify-content: center;
     align-items: center;
-    margin-left: .5rem;
     border-radius: 5px;
 
     img{
@@ -67,6 +72,13 @@
             &:after {
                 content: '';
                 width: calc(100% + 2rem);
+            }
+        }
+    }
+    &.current_page_item {
+        a {
+            &:after {
+                opacity: 1;
             }
         }
     }

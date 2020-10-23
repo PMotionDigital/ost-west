@@ -1,6 +1,5 @@
 <?php
     
-
     function is_subscribe_work() {
 
         global $current_user;

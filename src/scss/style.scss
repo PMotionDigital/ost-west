@@ -17,6 +17,7 @@
 
 // header
 @import './parts/header/main-header.scss';
+@import './parts/header/header-mobile.scss';
 
 // footer
 @import './parts/footer/footer.scss';
@@ -27,6 +28,7 @@
 @import './parts/components/note-form.scss';
 @import './parts/posts/main-posts.scss';
 @import './parts/posts/main-post.scss';
+@import './parts/components/breadcrumbs.scss';
 
 // modals
 @import './parts/components/modals/modals.scss';
@@ -40,6 +42,10 @@
 @import './parts/pages/page-aboutUs.scss';
 @import './parts/pages/page-providers.scss';
 @import './parts/pages/page-guide.scss';
+@import './parts/pages/single-post.scss';
 
+// main
 @import './parts/main';
 
+// responsive
+@import './responsive/responsive.scss';
