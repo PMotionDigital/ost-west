@@ -2,7 +2,7 @@
     <section class="providers col-lg-11 wrapper dis-flex flex-wrap-wrap">
         <div class="providers_list">
             <h2 class="providers_title">Провайдеры <span class="country">Германия</span></h2>
-            <ul class="dis-flex" data-slider-providers>
+            <ul class="providers-slider dis-flex" data-slider-providers>
                 <li class="providers_item">
                     <a href="#">
                         <div class="providers_item-image">
@@ -71,7 +71,7 @@
         </div>
         <div class="providers_list">
             <h2 class="providers_title">Провайдеры <span class="country">Швейцария</span></h2>
-            <ul class="dis-flex" data-slider-providers>
+            <ul class="providers-slider dis-flex" data-slider-providers>
                 <li class="providers_item">
                     <a href="#">
                         <div class="providers_item-image">
@@ -92,7 +92,7 @@
         </div>
         <div class="providers_list">
             <h2 class="providers_title">Провайдеры <span class="country">Украина</span></h2>
-            <ul class="dis-flex" data-slider-providers>
+            <ul class="providers-slider dis-flex" data-slider-providers>
                 <li class="providers_item">
                     <a href="#">
                         <div class="providers_item-image">
@@ -103,9 +103,16 @@
                 </li>
             </ul>
         </div>
+        <?php if (is_user_logged_in()) { ?>
         <div class="providers_subscription">
             <h2 class="providers_title">Онлайн подписка</h2>
             <a href="#" class="button">Перейти в личный кабинет</a>
         </div>
+        <?php } else { ?>
+            <div class="providers_subscription">
+            <h2 class="providers_title">Онлайн подписка</h2>
+            <button data-modal-btn="login" class="button">Зарегистрироваться и оплатить подписку</button>
+        </div>
+        <?php } ?>
     </section>
 <?php get_footer(); ?>

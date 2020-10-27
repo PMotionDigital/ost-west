@@ -16,8 +16,12 @@
 		<span class="note-form_close"></span>
 		<div class="note-form_text"></div>
 	</div>
-	<?php get_template_part('templates/parts/modals/modal-login'); ?>
-	<?php get_template_part('templates/parts/modals/modal-register'); ?>
+	<?php 
+	if (!is_user_logged_in()) {
+		get_template_part('templates/parts/modals/modal-login');
+		get_template_part('templates/parts/modals/modal-register'); 
+	}
+	?>
 	<?php wp_footer(); ?>
 </body>
 </html>

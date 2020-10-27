@@ -100,6 +100,26 @@
         font-size: 1.2rem;
         padding: .5rem 2rem;
         border-radius: .25rem;
-        margin-left: .75rem;
+    }
+}
+
+@media only screen and (max-width: 768px) { 
+    .providers,
+    .providers_list { 
+        padding: 0;
+    }
+    .providers_list {
+        margin: 2rem 0;
+    }
+    .providers-slider {
+        white-space: nowrap;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .providers_item {
+            display: inline-block;
+            margin-right: 1rem;
+        }
     }
 }

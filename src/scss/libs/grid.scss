@@ -24,6 +24,23 @@
 .col-lg-vw-11 { width: 91.67vw; }
 .col-lg-vw-12 { width: 100vw; }
 
+.dis-grid {
+    display: grid;
+}
+
+.grid-col-lg-1 {
+    grid-template-columns: repeat(1,1fr);
+}
+.grid-col-lg-2 {
+    grid-template-columns: repeat(2,1fr);
+}
+.grid-col-lg-3 {
+    grid-template-columns: repeat(3,1fr);
+}
+.grid-col-lg-4 {
+    grid-template-columns: repeat(4,1fr);
+}
+
 .dis-flex {
     display: flex;
 }
@@ -82,4 +99,24 @@
 
 .flex-direction-col {
     flex-direction: column;
+}
+
+// gaps
+
+@for $i from 1 through 5 {
+    .grid-gap-#{$i} {
+        grid-gap: #{$i}rem;
+    }
+}
+
+@for $i from 1 through 10 {
+    .margin-t-#{$i} {
+        margin-top: #{$i}rem;
+    }
+}
+
+@for $i from 1 through 10 {
+    .margin-b-#{$i} {
+        margin-bottom: #{$i}rem;
+    }
 }

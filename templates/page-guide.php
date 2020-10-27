@@ -1,10 +1,19 @@
 <?php /* Template Name: Страница - программа передач */ get_header(); ?>
+<?php 
+    $cur_date = current_time('d.m.Y');
+    $cur_time = current_time('H:i');
+
+    get_template_part('templates/parts/components/json-programm'); 
+
+    $programm_data = get_query_var('data');
+
+?>
     <section class="guide col-lg-11 wrapper">
         <div class="guide_days col-lg-12 dis-flex justify-content-between align-items-center">
             <button type="button" class="guide_days-button guide_days-button--prev"></button>
             <ul class="dis-flex justify-content-center">
                 <li class="guide_days-item guide_days-item--current" data-day-name="monday">
-                    <button type="button">Сегодня</button>
+                    <button type="button">Понедельник</button>
                 </li>
                 <li class="guide_days-item" data-day-name="tuesday">
                     <button type="button">Вторник</button>

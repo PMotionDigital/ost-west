@@ -139,3 +139,31 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .user-profile_wrap {
+        display: block;
+    }
+    .user-info_data,
+    .user-info_subscribe  {
+        margin-bottom: 2rem;
+    }
+    .user-info_data {
+        .section-title {
+            display: flex;
+            justify-content: space-between; 
+            a {
+                color: $purple;
+                text-transform: inherit;
+            }
+        }
+    }
+    .tariff-list {
+        grid-template-columns: repeat(2, 2fr);
+    }
+    .user-info_logout {
+        a {
+            text-align: left;
+        }
+    }
+}

@@ -1600,6 +1600,21 @@ only screen and (min-resolution: 2dppx){
 .col-lg-vw-12 {
   width: 100vw; }
 
+.dis-grid {
+  display: grid; }
+
+.grid-col-lg-1 {
+  grid-template-columns: repeat(1, 1fr); }
+
+.grid-col-lg-2 {
+  grid-template-columns: repeat(2, 1fr); }
+
+.grid-col-lg-3 {
+  grid-template-columns: repeat(3, 1fr); }
+
+.grid-col-lg-4 {
+  grid-template-columns: repeat(4, 1fr); }
+
 .dis-flex {
   display: flex; }
 
@@ -1644,6 +1659,81 @@ only screen and (min-resolution: 2dppx){
 
 .flex-direction-col {
   flex-direction: column; }
+
+.grid-gap-1 {
+  grid-gap: 1rem; }
+
+.grid-gap-2 {
+  grid-gap: 2rem; }
+
+.grid-gap-3 {
+  grid-gap: 3rem; }
+
+.grid-gap-4 {
+  grid-gap: 4rem; }
+
+.grid-gap-5 {
+  grid-gap: 5rem; }
+
+.margin-t-1 {
+  margin-top: 1rem; }
+
+.margin-t-2 {
+  margin-top: 2rem; }
+
+.margin-t-3 {
+  margin-top: 3rem; }
+
+.margin-t-4 {
+  margin-top: 4rem; }
+
+.margin-t-5 {
+  margin-top: 5rem; }
+
+.margin-t-6 {
+  margin-top: 6rem; }
+
+.margin-t-7 {
+  margin-top: 7rem; }
+
+.margin-t-8 {
+  margin-top: 8rem; }
+
+.margin-t-9 {
+  margin-top: 9rem; }
+
+.margin-t-10 {
+  margin-top: 10rem; }
+
+.margin-b-1 {
+  margin-bottom: 1rem; }
+
+.margin-b-2 {
+  margin-bottom: 2rem; }
+
+.margin-b-3 {
+  margin-bottom: 3rem; }
+
+.margin-b-4 {
+  margin-bottom: 4rem; }
+
+.margin-b-5 {
+  margin-bottom: 5rem; }
+
+.margin-b-6 {
+  margin-bottom: 6rem; }
+
+.margin-b-7 {
+  margin-bottom: 7rem; }
+
+.margin-b-8 {
+  margin-bottom: 8rem; }
+
+.margin-b-9 {
+  margin-bottom: 9rem; }
+
+.margin-b-10 {
+  margin-bottom: 10rem; }
 
 img {
   max-width: 100%;
@@ -1785,7 +1875,7 @@ input, textarea {
   padding: 1rem 0;
   position: relative;
   text-decoration: none;
-  font-size: .85rem; }
+  white-space: nowrap; }
   .menu-item a:after {
     content: '';
     position: absolute;
@@ -1816,23 +1906,25 @@ input, textarea {
 .user-stat {
   display: flex;
   align-items: center; }
-  .user-stat .user-stat_pic {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 100%;
-    position: relative;
-    overflow: hidden;
-    margin-right: .75rem; }
-    .user-stat .user-stat_pic img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; }
-  .user-stat .user-stat_name {
-    font-size: .85rem;
-    color: #fff; }
+
+.user-stat_pic {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-right: .75rem; }
+  .user-stat_pic img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+
+.user-stat_name {
+  font-size: .85rem;
+  color: #fff; }
 
 .header-burger {
   padding: .5rem 0; }
@@ -1844,10 +1936,18 @@ input, textarea {
   background-size: contain; }
 
 .header-mobile_profile a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; }
+
+.header-mobile_profile button {
   display: block;
   height: 1.5rem;
   background: url(../img/icons/user-icon.svg) right center no-repeat;
   background-size: contain; }
+
+.header-mobile_profile .user-stat_name {
+  color: #804284; }
 
 .header-mobile-nav {
   position: fixed;
@@ -2020,8 +2120,8 @@ input, textarea {
       display: none; }
   .programm-list_item {
     display: inline-block;
-    height: 20vh;
-    width: 80%; }
+    height: 29vh;
+    width: 90%; }
     .programm-list_item:not(:last-child) {
       margin-right: .5rem; }
     .programm-list_item .programm-list_item-image {
@@ -2041,7 +2141,8 @@ input, textarea {
   font-weight: 500; }
 
 .nowtv_list {
-  display: flex; }
+  display: flex;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 25%); }
 
 .nowtv_list-item {
   white-space: nowrap;
@@ -2254,6 +2355,9 @@ input, textarea {
     cursor: pointer;
     z-index: 0; }
 
+.modal-pay .modal_wrap {
+  padding: 0; }
+
 .page-default {
   margin-top: 2.5rem; }
 
@@ -2375,6 +2479,23 @@ input, textarea {
     text-decoration: none; }
     .user-info_logout a:hover {
       text-decoration: underline; }
+
+@media only screen and (max-width: 768px) {
+  .user-profile_wrap {
+    display: block; }
+  .user-info_data,
+  .user-info_subscribe {
+    margin-bottom: 2rem; }
+  .user-info_data .section-title {
+    display: flex;
+    justify-content: space-between; }
+    .user-info_data .section-title a {
+      color: #804284;
+      text-transform: inherit; }
+  .tariff-list {
+    grid-template-columns: repeat(2, 2fr); }
+  .user-info_logout a {
+    text-align: left; } }
 
 .programms {
   background-color: #50514d; }
@@ -2499,7 +2620,9 @@ input, textarea {
 .episode {
   width: 19.5rem;
   display: block;
-  margin: 0 1.2rem 1.2rem 0; }
+  margin: 0 1.2rem 1.2rem 0;
+  color: #fff;
+  text-align: left; }
 
 .episodes_list li:nth-child(4n) .episode {
   margin-right: 0; }
@@ -2805,8 +2928,22 @@ input, textarea {
   .providers_subscription .button {
     font-size: 1.2rem;
     padding: .5rem 2rem;
-    border-radius: .25rem;
-    margin-left: .75rem; }
+    border-radius: .25rem; }
+
+@media only screen and (max-width: 768px) {
+  .providers,
+  .providers_list {
+    padding: 0; }
+  .providers_list {
+    margin: 2rem 0; }
+  .providers-slider {
+    white-space: nowrap;
+    overflow-x: scroll; }
+    .providers-slider::-webkit-scrollbar {
+      display: none; }
+    .providers-slider .providers_item {
+      display: inline-block;
+      margin-right: 1rem; } }
 
 .guide {
   position: relative; }
@@ -2900,7 +3037,9 @@ input, textarea {
     height: auto; }
 
 .single-post_sidebar {
-  grid-template-columns: 6/8; }
+  grid-column: 6/8; }
+  .single-post_sidebar .main-post:not(:last-child) {
+    margin-bottom: 1rem; }
 
 .single-post_val a {
   color: #804284;
@@ -2925,6 +3064,24 @@ input, textarea {
     padding: 2rem; }
   .single-post_title {
     font-size: 1.75rem; } }
+
+.page-online {
+  margin-top: 0;
+  color: #fff; }
+
+.online-tv {
+  position: relative;
+  z-index: 1; }
+
+.page-online_news {
+  margin-top: 2rem;
+  color: #000; }
+
+.online-tv_player {
+  padding-right: 3rem; }
+  .online-tv_player video {
+    width: 100%;
+    height: 100%; }
 
 * {
   margin: 0;

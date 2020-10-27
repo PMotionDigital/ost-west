@@ -26,7 +26,7 @@
                 <h3><?php echo get_the_title($item); ?></h3>
                 <p><?php echo $item->snippet->description; ?></p>
                 <div class="programm-list_item-buttons">
-                    <a href="../programma" class="button type-2">Смотреть</a>
+                    <a data-pizda="<?php the_field('playlist_id', $item); ?>" href="https://www.youtube.com/watch?v=CQ0CjQbXfas&list=<?php echo get_field('playlist_id', $item); ?>" target="_blank" class="button type-2">Смотреть</a>
                     <a href="<?php echo get_permalink($item) ?>" class="button type-2">Эпизоды</a>
                 </div>
             </div>

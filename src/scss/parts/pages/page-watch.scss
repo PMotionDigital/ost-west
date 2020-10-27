@@ -43,7 +43,7 @@
     }
 }
 
-.selected-programm{
+.selected-programm {
     background-color: #e697e3;
     color: $white;
     padding: 1.5rem 4rem;
@@ -78,6 +78,8 @@
     width: 19.5rem;
     display: block;
     margin: 0 1.2rem 1.2rem 0;
+    color: $white;
+    text-align: left;
 }
 
 .episodes_list li:nth-child(4n){

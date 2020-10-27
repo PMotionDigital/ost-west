@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php 
+    get_header(); 
+    $categories = get_the_category();
+    $category_id = $categories[0]->cat_ID;
+?>
 <?php if (have_posts()):the_post(); ?>
 <section class="single-post dis-flex flex-wrap-wrap justify-content-center">
     <div class="single-post_wrap col-lg-11">
@@ -29,7 +33,23 @@
             </div>
         </div>
         <div class="single-post_sidebar">
-            222
+        <?php
+            $posts = get_posts(array(
+                'posts_per_page'	=> -1,
+                'post_type'         => 'post',
+                'cat'               => $category_id,
+                'category__not_in'  => array(4,5)
+            ));
+
+                foreach ($posts as $post) {
+                    setup_postdata($post);
+
+                    set_query_var('class', 'sidebar_post');
+                    //set_query_var('thumbnail', 'none');
+                    get_template_part( 'templates/parts/main-post');
+                }
+                wp_reset_postdata();
+        ?>
         </div>
     </div>
 </section>

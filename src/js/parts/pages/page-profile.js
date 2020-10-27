@@ -23,7 +23,7 @@ jQuery(function($){
 
     userCountrySelect.countrySelect({
         defaultCountry: currentSlug,
-        onlyCountries: ['us', 'ru', 'ge', 'en'],
+        onlyCountries: ['us', 'ru', 'de', 'en'],
         responsiveDropdown: true,
     });
 
@@ -31,6 +31,7 @@ jQuery(function($){
         setTimeout(function() {
             let val = userCountrySelect.countrySelect('getSelectedCountryData');
             userCountryInput.val(val.iso2);
+            profileFormBtn.removeClass('disabled');
         },50);
     });
 

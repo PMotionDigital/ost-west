@@ -32,12 +32,13 @@ jQuery(function($){
 
                 let jsonOutput = JSON.parse(response);
                 let respMessage = jsonOutput.error;
+                let okMessage = jsonOutput.status;
 
                 noteFormText.html('');
                 noteForm.addClass('open');
 
-                if(respMessage.length == 0) {
-                    noteFormText.html('Изменения успешно сохранены!');                    
+                if(okMessage == 'ok') {
+                    noteFormText.html('Успешно! Перенаправляем в личный кабинет');                    
                     setTimeout(function(){
                         window.location.href = '/profile/';
                     }, 1000);

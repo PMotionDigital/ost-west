@@ -19,6 +19,9 @@
             </div>
             <?php wp_nonce_field('ajax-login-nonce', 'login-security'); ?>
         </form>
+        <div class="modal-social">
+            
+        </div>
     </div>
     <div class="modal_close" data-modal-close></div>
 </div>

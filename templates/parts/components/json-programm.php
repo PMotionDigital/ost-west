@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    echo do_shortcode('[table id=1 /]');
+    echo do_shortcode('[table id=2 /]');
     $json_programms = ob_get_clean();
     $json_programms = json_decode($json_programms);
 

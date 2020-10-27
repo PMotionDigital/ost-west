@@ -30,7 +30,12 @@
 }
 
 .single-post_sidebar {
-    grid-template-columns: 6/8;
+    grid-column: 6/8;
+    .main-post {
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
 }
 
 // правила стилизации для gutenberg

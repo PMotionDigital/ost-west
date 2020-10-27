@@ -15,6 +15,7 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
     Next page token: <?php echo $playlistitems->nextPageToken; ?><br>
     Page info. total Results:  <?php echo $playlistitems->pageInfo->totalResults; ?><br>
     Page info. Results per page:  <?php echo $playlistitems->pageInfo->resultsPerPage; ?><br>
+    player.embedHtml:  <?php echo $playlistitems->contentDetails[0]->videoId; ?><br>
 </h1> -->
     <section class="watch">
         <?php get_template_part('templates/parts/section-programm'); ?>
@@ -41,7 +42,7 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
             <ul class="episodes_list col-lg-11 dis-flex flex-wrap-wrap">
                 <?php foreach($playlistitems->items as $item) { ?>
                 <li>
-                    <a class="episodes_item episode">
+                    <button data-modal-btn="watch" data-video-id="<?php echo $item->snippet->resourceId->videoId; ?>" class="episodes_item episode">
                         <div class="episode_image">
                             <img src="<?php echo $item->snippet->thumbnails->high->url; ?>">
                         </div>
@@ -49,10 +50,11 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
                         <?php echo $item->snippet->title; ?>
                         </h3>
                         <p class="episode_date"><?php echo $item->snippet->publishedAt; ?></p>
-                    </a>
+                    </button>
                 </li>
                 <?php } ?>
             </ul>
         </div>
     </section>
+    <?php get_template_part('templates/parts/modals/modal-watch'); ?>
 <?php get_footer(); ?>

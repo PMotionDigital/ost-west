@@ -19,8 +19,7 @@
                 foreach($programm_data as $count => $programm_item) {
                     if( $cur_date == $programm_item['Дата'] && ($cur_time <= date( 'H:i', strtotime($programm_data[$count+1]['Время']))) ) { 
             ?>
-                    <div class="nowtv_list-item <?php 
-                    if($first_item == 0) { echo 'nowtv_list-item--active'; }?>">
+                    <div class="nowtv_list-item <?php if($first_item == 0) { echo 'nowtv_list-item--active'; }?>">
                         <?php print_r( date( 'H:i', strtotime($programm_item['Время']) ) ); ?>
                         <?php echo $programm_item['Название фильма']; ?>
                     </div>        

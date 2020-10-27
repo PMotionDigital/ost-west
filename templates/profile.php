@@ -11,6 +11,9 @@ $cur_user_id = get_current_user_id();
         <div class="user-info_data data-fields">
             <div class="section-title type-1">
                 <h2>Профиль</h2>
+                <?php if(wp_is_mobile()) { ?>
+                <a href="<?php echo wp_logout_url(); ?>">Выйти</a>
+                <?php } ?>
             </div>
             <form class="data-fields_form" id="data-fields_form" action="update_user_profile" method="post" enctype="multipart/form-data">
                 <div class="data-fields_pic data-fields_wrap">
@@ -39,13 +42,9 @@ $cur_user_id = get_current_user_id();
         </div>
         <div class="user-info_subscribe">
             <div class="section-title type-1">
-                <h2>Профиль</h2>
+                <h2>Подписка</h2>
             </div>
             <div class="tariff-list">
-                <?php 
-                    echo do_shortcode('[wp_paypal button="buynow" product_name="test" prod_type="tariff_1"]');
-                    echo do_shortcode('[sofort_button prod_type="tariff_1"]');
-                ?>
                 <?php if(have_rows('список_тарифов', 'option')): ?>
 	            <?php while(have_rows('список_тарифов', 'option')): the_row(); ?>  
                 <div class="tariff-list_item tariff-item">
@@ -56,7 +55,7 @@ $cur_user_id = get_current_user_id();
                         <div class="tariff-item_price">
                             <?php the_sub_field('стоимость_тарифа'); ?>€
                         </div>
-                        <button class="button type-1" data-choose-tariff>Выбрать тариф</button>
+                        <button data-modal-btn="pay" class="button type-1" data-choose-tariff>Выбрать тариф</button>
                     </div>
                 </div>
                 <?php endwhile; ?>
@@ -123,4 +122,5 @@ $cur_user_id = get_current_user_id();
     acf_form($options);       
     ?>
 </div>
+<?php get_template_part('templates/parts/modals/modal-pay'); ?>
 <?php get_footer(); ?>
