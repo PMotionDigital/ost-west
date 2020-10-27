@@ -3083,6 +3083,10 @@ input, textarea {
     width: 100%;
     height: 100%; }
 
+.online-tv_timetable .guide_list-item .item_time,
+.online-tv_timetable .guide_list-item .button.detail {
+  color: #fff; }
+
 * {
   margin: 0;
   padding: 0;

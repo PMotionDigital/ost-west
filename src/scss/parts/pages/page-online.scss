@@ -20,3 +20,12 @@
         height: 100%;
     }
 }
+
+.online-tv_timetable {
+    .guide_list-item {
+        .item_time,
+        .button.detail {
+            color: $white;
+        }
+    }
+}
