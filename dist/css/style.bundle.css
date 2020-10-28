@@ -455,7 +455,7 @@
 	height:15px;
 	-webkit-box-shadow:0px 0px 1px 0px #888;
 	box-shadow:0px 0px 1px 0px #888;
-	background-image:url("../../build/img/flags.png");
+	background-image:url("../../dist/img/flags.png");
 	background-repeat:no-repeat;
 	background-color:#dbdbdb;
 	background-position:20px 0
@@ -466,7 +466,7 @@ only screen and (min-device-pixel-ratio: 2),
 only screen and (min-resolution: 192dpi),
 only screen and (min-resolution: 2dppx){
 	.country-select .flag{
-		background-image:url("../../build/img/flags@2x.png")
+		background-image:url("../../dist/img/flags@2x.png")
 	}
 }
 .country-select .flag{
@@ -1935,19 +1935,21 @@ input, textarea {
   background: url(../img/icons/burger.svg) left center no-repeat;
   background-size: contain; }
 
-.header-mobile_profile a {
+.header-mobile_profile {
   display: flex;
-  align-items: center;
-  justify-content: flex-end; }
-
-.header-mobile_profile button {
-  display: block;
-  height: 1.5rem;
-  background: url(../img/icons/user-icon.svg) right center no-repeat;
-  background-size: contain; }
-
-.header-mobile_profile .user-stat_name {
-  color: #804284; }
+  justify-content: flex-end;
+  align-items: center; }
+  .header-mobile_profile a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; }
+  .header-mobile_profile button {
+    display: block;
+    height: 1.5rem;
+    background: url(../img/icons/user-icon.svg) right center no-repeat;
+    background-size: contain; }
+  .header-mobile_profile .user-stat_name {
+    color: #804284; }
 
 .header-mobile-nav {
   position: fixed;
@@ -1956,7 +1958,7 @@ input, textarea {
   z-index: 9;
   width: 100%;
   height: 100%;
-  transition: all .1s ease-in-out;
+  transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   background-color: #804284;
   display: flex;
   align-items: center;
@@ -1974,6 +1976,8 @@ input, textarea {
     padding: 1rem;
     font-size: 1.5rem;
     justify-content: center; }
+    .header-mobile-nav .menu-item a:after {
+      left: 0; }
   .header-mobile-nav .header-mobile-nav_close {
     position: absolute;
     top: 2rem;
@@ -2071,7 +2075,7 @@ input, textarea {
       opacity: 1; }
 
 .programm-list_item-image {
-  height: 14rem;
+  height: 15rem;
   position: relative;
   z-index: 2;
   overflow: hidden; }
@@ -2259,7 +2263,8 @@ input, textarea {
     grid-column: 1/1; }
   .left_post:nth-child(1) .main-post_image,
   .left_post:nth-child(6) .main-post_image {
-    height: 25vh; }
+    height: 25vh;
+    min-height: 25vh; }
   .left_post:nth-child(1) .main-post_image,
   .left_post:nth-child(6) .main-post_image,
   .left_post:nth-child(1) .main-post_desc,
@@ -2502,9 +2507,6 @@ input, textarea {
   .programms h2 {
     color: #fff; }
   .programms .programm-list_item {
-    width: 25rem;
-    margin-right: 1.2rem;
-    margin-top: 1.2rem;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.4); }
     .programms .programm-list_item::before {
@@ -2523,9 +2525,13 @@ input, textarea {
   .programms .programm-list_item-desc {
     display: none; }
 
+.programms_list {
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  grid-gap: 1rem; }
+
 .programms_wrapper {
-  padding-top: 2.5rem;
-  padding-right: 3.5rem; }
+  padding-top: 2.5rem; }
   .programms_wrapper:last-child {
     padding-bottom: 4.5rem; }
 
@@ -2568,6 +2574,10 @@ input, textarea {
 .programms_list {
   margin: auto;
   position: relative; }
+
+@media only screen and (max-width: 768px) {
+  .programms_list .programm-list_item {
+    width: 100%; } }
 
 .watch .programm {
   padding: 0; }
@@ -2967,9 +2977,16 @@ input, textarea {
   margin: 1.5rem 1rem; }
   .guide_days-item button {
     text-transform: uppercase;
-    font-size: 1.3rem; }
-  .guide_days-item--current {
-    background-color: #804284; }
+    font-size: 1.3rem;
+    transition: all .25s ease-in-out;
+    background: transparent;
+    padding: .5rem 1rem;
+    border-radius: 5rem; }
+  .guide_days-item--current button,
+  .guide_days-item:hover button {
+    color: #fff;
+    background-color: #804284;
+    font-weight: bold; }
 
 .guide_programm {
   opacity: 0;
@@ -3023,6 +3040,31 @@ input, textarea {
     display: inline; }
   [data-modal="details"] .item_content-item .value {
     opacity: .8; }
+
+@media only screen and (max-width: 768px) {
+  .guide_days {
+    padding: 2rem 0; }
+    .guide_days ul {
+      display: block;
+      white-space: nowrap;
+      overflow-x: scroll;
+      -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 25%); }
+      .guide_days ul::-webkit-scrollbar {
+        display: none; }
+  .guide_days-item {
+    margin: 0;
+    display: inline-block; }
+  .guide_programm {
+    padding: 2rem 0; }
+  .guide_list {
+    margin-top: 1rem;
+    max-height: 55vh;
+    overflow-y: scroll; }
+  .guide_programm-title {
+    padding: 0rem 1.75rem; }
+  .guide_list-item {
+    padding: 1rem 1.75rem;
+    margin: 0; } }
 
 .single-post_wrap {
   display: grid;
@@ -3099,6 +3141,14 @@ input, textarea {
 .online-tv_timetable .guide_list-item .item_time,
 .online-tv_timetable .guide_list-item .button.detail {
   color: #fff; }
+
+@media only screen and (max-width: 768px) {
+  .page-online .programm {
+    justify-content: center;
+    flex-direction: row; }
+  .online-tv_player {
+    padding-right: 0;
+    margin-bottom: 1rem; } }
 
 * {
   margin: 0;
@@ -3225,6 +3275,14 @@ body {
     width: 91.66666667%; }
   .col-xs-12 {
     width: 100%; }
+  .grid-col-xs-1 {
+    grid-template-columns: repeat(1, 1fr); }
+  .grid-col-xs-2 {
+    grid-template-columns: repeat(2, 1fr); }
+  .grid-col-x-3 {
+    grid-template-columns: repeat(3, 1fr); }
+  .grid-col-xs-4 {
+    grid-template-columns: repeat(4, 1fr); }
   html {
     font-size: 14px; } }
 

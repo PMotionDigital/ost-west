@@ -29,3 +29,16 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) { 
+    .page-online {
+        .programm {
+            justify-content: center;
+            flex-direction: row;
+        }
+    }
+    .online-tv_player {
+        padding-right: 0;
+        margin-bottom: 1rem;
+    }
+}

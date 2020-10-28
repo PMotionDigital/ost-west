@@ -1,5 +1,5 @@
 <div class="modal modal-login dis-flex align-items-center justify-content-center" data-modal="login">
-    <div class="modal_wrap col-lg-4 col-lm-12 col-xs-12">
+    <div class="modal_wrap col-lg-4 col-lm-11 col-xs-11">
         <!-- форма логина -->
         <form id="pt_login_form" action="pt_login_member" method="post">
             <div class="section-title type-1">

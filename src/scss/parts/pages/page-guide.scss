@@ -28,10 +28,18 @@
     button{
         text-transform: uppercase;
         font-size: 1.3rem;
+        transition: all .25s ease-in-out;
+
+        background: transparent;
+        padding: .5rem 1rem;
+        border-radius: 5rem;
     }
 
-    &--current{
-        background-color:$purple;
+    &--current button,
+    &:hover  button{
+        color: $white;
+        background-color: $purple;
+        font-weight: bold;
     }
 }
 
@@ -111,4 +119,42 @@
             opacity: .8;
         }
     }
+}
+
+@media only screen and (max-width: 768px) { 
+    .guide_days {
+        padding: 2rem 0;
+        ul {
+            display: block;
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-mask-image: linear-gradient(270deg,transparent 0,#000 25%);
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+    .guide_days-item {
+        margin: 0;
+        display: inline-block;
+    }
+
+    .guide_programm {
+        padding: 2rem 0;
+    }
+
+    .guide_list {
+        margin-top: 1rem;
+        max-height: 55vh;
+        overflow-y: scroll;
+    }
+
+    .guide_programm-title {
+        padding: 0rem 1.75rem;
+    }
+    .guide_list-item {
+        padding: 1rem 1.75rem;
+        margin: 0;
+    }
+
 }

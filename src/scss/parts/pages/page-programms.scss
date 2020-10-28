@@ -1,4 +1,4 @@
-.programms{
+.programms {
     background-color: #50514d;
 
     h2{
@@ -6,9 +6,6 @@
     }
 
     .programm-list_item{
-        width: 25rem;
-        margin-right: 1.2rem;
-        margin-top: 1.2rem;
         transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         box-shadow: 0px 0px 0px rgba($black, .4);
 
@@ -37,9 +34,13 @@
         display: none;
     }
 }
+.programms_list {
+    display: grid;
+    grid-template-columns: repeat(3,3fr);
+    grid-gap: 1rem;
+}
 .programms_wrapper{
     padding-top: 2.5rem;
-    padding-right: 3.5rem;
 
     &:last-child {
         padding-bottom: 4.5rem;
@@ -96,4 +97,12 @@
 .programms_list{
     margin: auto;
     position: relative;
+}
+
+@media only screen and (max-width: 768px) { 
+    .programms_list {
+        .programm-list_item {
+            width: 100%;
+        }
+    }
 }

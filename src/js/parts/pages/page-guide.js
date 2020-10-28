@@ -2,6 +2,9 @@ const daysItem = $('[data-day-name]');
 const guideProgramm = $('[data-tab-name]');
 const daysButton = $('.guide_days-button');
 const detailsModal = $('[data-modal="details"]');
+const guideList = $('.guide_list');
+const guideItemCur = $('.guide_list-item--current');
+
 const programmClickHandler = function(currentDay){
     $(guideProgramm).each(function (i, item){
         if (currentDay.attr('data-day-name') === $(item).attr('data-tab-name')){
@@ -49,3 +52,10 @@ $('[data-modal-btn="details"]').on('click', (e) => {
     detailsModal.find('.modal_wrap').html(detailHtml);
 });
 
+// mobile
+
+if($('body').hasClass('mobile') && $('body').hasClass('page-template-page-guide')) {
+    let currentElTop = $('.guide_list-item--current').position().top;
+    let curItemHeight = guideItemCur.outerHeight();
+    guideList.scrollTop(currentElTop - curItemHeight);
+}

@@ -7,12 +7,12 @@
         <div class="programms_wrapper">
             <div class="dis-flex justify-content-center">
                 <div class="col-lg-11">
-                    <div class="section-title type-1">
+                    <div class="section-title type-1 margin-b-1">
                         <h2>Наши программы</h2>
                     </div>
                 </div>
             </div>
-            <div class="programms_list dis-flex flex-wrap-wrap col-lg-11">
+            <div class="programms_list dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1 col-lg-11">
                 <?php
                 $posts = get_posts(array(
                     'posts_per_page'	=> -1,
@@ -52,12 +52,12 @@
         <div class="programms_wrapper">
             <div class="dis-flex justify-content-center">
                 <div class="col-lg-11">
-                    <div class="section-title type-1">
+                    <div class="section-title type-1 margin-b-1">
                         <h2>Наши репортажи</h2>
                     </div>
                 </div>
             </div>
-            <div class="programms_list dis-flex flex-wrap-wrap col-lg-11">
+            <div class="programms_list dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1 col-lg-11">
             <?php
                 $posts = get_posts(array(
                     'posts_per_page'	=> -1,

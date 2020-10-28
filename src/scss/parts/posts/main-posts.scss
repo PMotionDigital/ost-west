@@ -75,6 +75,7 @@
     .left_post:nth-child(1) .main-post_image, 
     .left_post:nth-child(6) .main-post_image {
         height: 25vh;
+        min-height: 25vh;
     }
 
     .left_post:nth-child(1) .main-post_image,

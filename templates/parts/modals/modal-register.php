@@ -1,5 +1,5 @@
 <div class="modal modal-register dis-flex align-items-center justify-content-center" data-modal="register">
-    <div class="modal_wrap col-lg-4 col-lm-12 col-xs-12">
+    <div class="modal_wrap col-lg-4 col-lm-11 col-xs-11">
         <!-- форма регистрации -->
         <form id="pt_registration_form" action="pt_register_member" method="POST">
             <div class="section-title type-1">

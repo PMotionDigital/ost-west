@@ -59,8 +59,8 @@
 ?>
     <section class="guide col-lg-11 wrapper">
         <div class="guide_days col-lg-12 dis-flex justify-content-between align-items-center">
-            <button type="button" class="guide_days-button guide_days-button--prev"></button>
-            <ul class="dis-flex justify-content-center">
+            <?php if(!wp_is_mobile()) { ?><button type="button" class="guide_days-button guide_days-button--prev"></button><?php } ?>
+            <ul class="dis-flex align-items-center justify-content-center">
                 <?php 
                 $first = true;
                 foreach($weekly_days as $day => $date): ?>
@@ -71,14 +71,14 @@
                 endforeach; 
                 ?>
             </ul>
-            <button type="button" class="guide_days-button guide_days-button--next"></button>
+            <?php if(!wp_is_mobile()) { ?><button type="button" class="guide_days-button guide_days-button--next"></button><?php } ?>
         </div>
         <?php
         $first = true;
         foreach($weekly_programm as $day => $programm): ?>
         <div class="guide_programm <?php if($first){echo 'guide_programm--current'; $first = false; } ?>" data-tab-name="<?php echo $day; ?>">
             <h2 class="guide_programm-title"><?php echo $day.', '.$programm['program_date']; ?></h2>
-            <div class="guide_list dis-flex">
+            <div class="guide_list dis-flex flex-wrap-wrap">
                 <?php 
                 $items_per_col = array();
                 $min_items_per_col = floor(count($programm['programm_items'])/3);
@@ -97,7 +97,7 @@
                 foreach($programm['programm_items'] as $i => $item): 
                     $class = '';
                     if($open_col):
-                        echo '<div class="guide_list-section col-lg-4  col-xs-12"><ul>';
+                        echo '<div class="guide_list-section col-lg-4 col-xs-12"><ul>';
                         $open_col = false;
                     endif; ?>
 

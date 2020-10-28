@@ -45,6 +45,19 @@
     .col-xs-11 { width: 91.66666667%; }
     .col-xs-12 { width: 100%; }
 
+    .grid-col-xs-1 {
+        grid-template-columns: repeat(1,1fr);
+    }
+    .grid-col-xs-2 {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .grid-col-x-3 {
+        grid-template-columns: repeat(3,1fr);
+    }
+    .grid-col-xs-4 {
+        grid-template-columns: repeat(4,1fr);
+    }
+
     // global
     html {
         font-size: 14px;
