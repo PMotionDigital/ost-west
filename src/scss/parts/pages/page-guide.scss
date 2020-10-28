@@ -79,7 +79,12 @@
         font-size: 1.3rem;
         padding-bottom: .5rem;
     }
-
+    .item_content {
+        display: none;
+    }
+    &--past {
+        opacity: 0.5;
+    }
     &--current{
         background-color: $purple;
         color: $white;
@@ -91,6 +96,19 @@
 
         .button::after{
             border-color: $white;
+        }
+    }
+}
+[data-modal="details"] {
+    .item_content-item {
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        .name,
+        .value {
+            display: inline;
+        }
+        .value {
+            opacity: .8;
         }
     }
 }

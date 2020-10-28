@@ -1,1314 +1,159 @@
 <?php /* Template Name: Страница - программа передач */ get_header(); ?>
 <?php 
-    $cur_date = current_time('d.m.Y');
-    $cur_time = current_time('H:i');
-
+    
+    $curr_date = current_time('d.m.Y');
+    $curr_time = current_time('H:i');
+    //echo $curr_date;
     get_template_part('templates/parts/components/json-programm'); 
-
     $programm_data = get_query_var('data');
+    $filter_date = $curr_date;
 
+    $ru_weekdays = array( 
+        'Monday' => 'Понедельник', 
+        'Tuesday' => 'Вторник', 
+        'Wednesday' => 'Среда', 
+        'Thursday' => 'Четверг', 
+        'Friday' => 'Пятница', 
+        'Saturday' => 'Суббота', 
+        'Sunday' => 'Воскресенье' 
+    );
+    $ru_month = array(
+        '',
+        'января',
+        'февраля',
+        'марта',
+        'апреля',
+        'мая',
+        'июня',
+        'июля',
+        'августа',
+        'сентября',
+        'октября',
+        'ноября',
+        'декабря'
+    );
+
+    $filtered = array_filter($programm_data, 'filterProgram');
+    function filterProgram($el) {
+        return strtotime($el['Дата']) >= strtotime(current_time('d.m.Y'));
+    };
+    $weekly_programm = array();
+    $weekly_days = array();
+    $counter = 0;
+    $prev_weekday = '';
+    foreach($filtered as $item):
+        if($counter < 7):
+            
+            $day = $ru_weekdays[date('l', strtotime($item['Дата']))];
+            
+            if($prev_weekday != $day):
+                $prev_weekday = $day;
+                $counter ++;
+            endif;
+            $weekly_programm[$day]['programm_items'][] = $item;
+            $weekly_programm[$day]['program_date'] = intval(date('d', strtotime($item['Дата']))).' '.$ru_month[date('m', strtotime($item['Дата']))];
+            $weekly_days[$day] = date('d, M', strtotime($item['Дата']));
+        endif;
+    endforeach;
+    //print_r($weekly_programm);
 ?>
     <section class="guide col-lg-11 wrapper">
         <div class="guide_days col-lg-12 dis-flex justify-content-between align-items-center">
             <button type="button" class="guide_days-button guide_days-button--prev"></button>
             <ul class="dis-flex justify-content-center">
-                <li class="guide_days-item guide_days-item--current" data-day-name="monday">
-                    <button type="button">Понедельник</button>
-                </li>
-                <li class="guide_days-item" data-day-name="tuesday">
-                    <button type="button">Вторник</button>
-                </li>
-                <li class="guide_days-item" data-day-name="wednesday">
-                    <button type="button">Среда</button>
-                </li>
-                <li class="guide_days-item" data-day-name="thursday">
-                    <button type="button">Четверг</button>
-                </li>
-                <li class="guide_days-item" data-day-name="friday">
-                    <button type="button">Пятница</button>
-                </li>
-                <li class="guide_days-item" data-day-name="saturday">
-                    <button type="button">Суббота</button>
-                </li>
-                <li class="guide_days-item" data-day-name="sunday">
-                    <button type="button">Воскресенье</button>
-                </li>
+                <?php 
+                $first = true;
+                foreach($weekly_days as $day => $date): ?>
+                <li class="guide_days-item <?php if($first == true){$first = false; echo 'guide_days-item--current'; }; ?>" 
+                    data-day-name="<?php echo $day; ?>">
+                    <button type="button"><?php echo $day; ?></button>
+                </li> <?php 
+                endforeach; 
+                ?>
             </ul>
             <button type="button" class="guide_days-button guide_days-button--next"></button>
         </div>
-        <div class="guide_programm guide_programm--current" data-tab-name="monday">
-            <h2 class="guide_programm-title">Понедельник, 19 октября</h2>
+        <?php
+        $first = true;
+        foreach($weekly_programm as $day => $programm): ?>
+        <div class="guide_programm <?php if($first){echo 'guide_programm--current'; $first = false; } ?>" data-tab-name="<?php echo $day; ?>">
+            <h2 class="guide_programm-title"><?php echo $day.', '.$programm['program_date']; ?></h2>
             <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
+                <?php 
+                $items_per_col = array();
+                $min_items_per_col = floor(count($programm['programm_items'])/3);
+                $difference = count($programm['programm_items']) - ($min_items_per_col * 3);
+                for ($i = 0; $i <= 2; $i++) {
+                    if ($i < $difference):
+                        $items_per_col[$i] = $min_items_per_col + 1;
+                    else:
+                        $items_per_col[$i] = $min_items_per_col;
+                    endif;
+                };
+
+                $col_num = 0;
+                $open_col = true;
+                
+                foreach($programm['programm_items'] as $i => $item): 
+                    $class = '';
+                    if($open_col):
+                        echo '<div class="guide_list-section col-lg-4  col-xs-12"><ul>';
+                        $open_col = false;
+                    endif; ?>
+
+                    <?php 
+                    if(date('H:i', strtotime($item['Время'])) < $curr_time 
+                        && strtotime($item['Дата']) <= strtotime(current_time('d.m.Y'))): 
+                        $class = 'guide_list-item--past'; 
+                        
+                        if($curr_time < date('H:i', strtotime($programm['programm_items'][$i+1]['Время']))):
+                           $class = 'guide_list-item--current';
+                        endif;
+                    endif;
+                    ?>
+                        <li class="guide_list-item item dis-flex <?php echo $class; ?>">
+                            <div class="item_time"><?php echo date('H:i', strtotime($item['Время'])); ?></div>
                             <div class="item_desc">
                                 <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
+                                    <?php echo $item['Название фильма']; ?>
                                 </h4>
-                                <a href="#" class="button detail">Подробнее</a>
+                                <button data-modal-btn="details" class="button detail">Подробнее</button>
                             </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
+                            <div class="item_content">
+                                <?php 
+                                foreach($item as $key => $value):
+                                    if($value != '' && $key != 'ID'):
+                                        ?>
+                                        <div class="item_content-item">
+                                            <div class="name"><?php echo $key; ?>:</div>
+                                            <div class="value"><?php echo $value; ?></div>
+                                        </div> 
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
                             </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </li> <?php
+                    $items_count = $i;
+                    if($items_count >= $items_per_col[$col_num] - 1):
+                        $dec_val = 0;
+                        foreach($items_per_col as $col => $per_col):
+                            if($col < $col_num):
+                                $dec_val += $per_col;
+                            endif;
+                        endforeach;
+                        $items_count -= $dec_val;
+                    endif;
+                    
+                    if($items_count == $items_per_col[$col_num] - 1):
+                        $col_num += 1;
+                        $open_col = true;
+                        echo '</ul></div>'; 
+                    endif;
+                endforeach; ?>
             </div>
-        </div>
-        <div class="guide_programm" data-tab-name="tuesday">
-            <h2 class="guide_programm-title">Вторник, 20 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="guide_programm" data-tab-name="wednesday">
-            <h2 class="guide_programm-title">Среда, 21 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="guide_programm" data-tab-name="thursday">
-            <h2 class="guide_programm-title">Четверг, 22 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="guide_programm" data-tab-name="friday">
-            <h2 class="guide_programm-title">Пятница, 23 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="guide_programm" data-tab-name="saturday">
-            <h2 class="guide_programm-title">Суббота, 24 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="guide_programm" data-tab-name="sunday">
-            <h2 class="guide_programm-title">Воскресенье, 25 октября</h2>
-            <div class="guide_list dis-flex">
-                <div class="guide_list-section col-lg-4 guide_list-section--past">
-                    <h3 class="guide_section-title">Утро</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">День</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex guide_list-item--current">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="guide_list-section col-lg-4">
-                    <h3 class="guide_section-title">Вечер</h3>
-                    <ul>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                        <li class="guide_list-item item dis-flex">
-                            <div class="item_time">15:00</div>
-                            <div class="item_desc">
-                                <h4 class="item_title">
-                                    Ждём в гости с Зубаром Двали #99. Чиатура
-                                </h4>
-                                <a href="#" class="button detail">Подробнее</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </div> <?php
+        endforeach; ?>
+        <?php get_template_part('templates/parts/modals/modal-details'); ?>
     </section>
 <?php get_footer(); ?>

@@ -33,7 +33,7 @@
                         <h4 class="item_title">
                         <?php echo $programm_item['Название фильма']; ?>
                         </h4>
-                        <a href="#" class="button detail">Подробнее</a>
+                        <a href="#" data-modal-btn="details" class="button detail">Подробнее</a>
                     </div>
                 </div>
                 <?php       
