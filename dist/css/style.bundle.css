@@ -2486,6 +2486,8 @@ input, textarea {
       text-decoration: underline; }
 
 @media only screen and (max-width: 768px) {
+  .data-fields_form {
+    padding: 1rem; }
   .user-profile_wrap {
     display: block; }
   .user-info_data,
