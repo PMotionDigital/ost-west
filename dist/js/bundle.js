@@ -15590,6 +15590,7 @@ jQuery(function($) {
     const modalLogin = $('[data-modal="login"]');
     const modalRegister = $('[data-modal="register"]');
     const noteForm = $('.note-form');
+    const noteFormText = noteForm.find('.note-form_text');
     const registerForm = $('#pt_registration_form');
     const formBtn = registerForm.find('button[type="submit"]');
 
@@ -15618,10 +15619,16 @@ jQuery(function($) {
 
                 let jsonOutput = JSON.parse(response);
                 let respMessage = jsonOutput.error;
+                let okMessage = jsonOutput.status;
 
-                noteForm.html('');
+                noteFormText.html('');
                 noteForm.addClass('open');
-                noteForm.html(respMessage);
+
+                if(okMessage == 'ok') {
+                    noteFormText.html('Успешно! Перенаправляем в личный кабинет');                    
+                } else {
+                    noteFormText.html(respMessage);
+                }
 
                 modalRegister.removeClass('open');
                 modalLogin.addClass('open');
@@ -15833,6 +15840,8 @@ jQuery(function($){
     const userCountryInput = $('[data-user-country-input]');
     const fileBtn = $('.acf-basic-uploader');
     const acfSubmit = $('.acf-button');
+    const tariffBtn = $('[data-modal-btn="pay"]');
+    const modalPay = $('[data-modal="pay"] .modal_wrap');
 
     let picUploaded = false;
     let currentSlug = userCountryInput.attr('data-user-country-input'); 
@@ -15922,6 +15931,13 @@ jQuery(function($){
 
 	});
 
+    // вставляем pay form в модалку
+
+    tariffBtn.on('click', function() {
+        let tariffPayForm = $(this).closest('.tariff-item').find('.tariff-item_pay').html();
+        modalPay.html(tariffPayForm);
+    });
+
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
@@ -15932,37 +15948,36 @@ jQuery(function($){
   !*** ./src/js/parts/pages/page-programms.js ***!
   \**********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-/* WEBPACK VAR INJECTION */(function($) {const programmItem = $('.programms').find('.programm-list_item');
-const modalProgramm = $('[data-programms-modal]');
-const modalContent = $(modalProgramm).find('.modal-content');
-const modalWrapper = $(modalProgramm).find('.modal-wrapper');
+// const programmItem = $('.programms').find('.programm-list_item');
+// const modalProgramm = $('[data-programms-modal]');
+// const modalContent = $(modalProgramm).find('.modal-content');
+// const modalWrapper = $(modalProgramm).find('.modal-wrapper');
 
-$(programmItem).on('click', function() {
-if(!modalProgramm.hasClass('opened')){
-    $(this).clone(true).unwrap().appendTo(modalContent);
-    modalProgramm.addClass('opened');
-    $('.programm-list_item').addClass('modal-opened');
-    modalProgramm.find('.programm-list_item').removeClass('modal-opened');
-    $('body').css('overflow', 'hidden');
-}
-})
+// $(programmItem).on('click', function() {
+// if(!modalProgramm.hasClass('opened')){
+//     $(this).clone(true).unwrap().appendTo(modalContent);
+//     modalProgramm.addClass('opened');
+//     $('.programm-list_item').addClass('modal-opened');
+//     modalProgramm.find('.programm-list_item').removeClass('modal-opened');
+//     $('body').css('overflow', 'hidden');
+// }
+// })
 
-modalWrapper.on('click', function() {
-    modalProgramm.removeClass('opened');
-    $('.programm-list_item').removeClass('modal-opened');
-    $('body').css('overflow', 'visible');
-    setTimeout(()=> {
-        modalContent.html('');
-    },200);
-})
+// modalWrapper.on('click', function() {
+//     modalProgramm.removeClass('opened');
+//     $('.programm-list_item').removeClass('modal-opened');
+//     $('body').css('overflow', 'visible');
+//     setTimeout(()=> {
+//         modalContent.html('');
+//     },200);
+// })
 
-
- 
 
  
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+ 
 
 /***/ }),
 

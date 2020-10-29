@@ -13,6 +13,8 @@ jQuery(function($){
     const userCountryInput = $('[data-user-country-input]');
     const fileBtn = $('.acf-basic-uploader');
     const acfSubmit = $('.acf-button');
+    const tariffBtn = $('[data-modal-btn="pay"]');
+    const modalPay = $('[data-modal="pay"] .modal_wrap');
 
     let picUploaded = false;
     let currentSlug = userCountryInput.attr('data-user-country-input'); 
@@ -101,5 +103,12 @@ jQuery(function($){
         });
 
 	});
+
+    // вставляем pay form в модалку
+
+    tariffBtn.on('click', function() {
+        let tariffPayForm = $(this).closest('.tariff-item').find('.tariff-item_pay').html();
+        modalPay.html(tariffPayForm);
+    });
 
 });

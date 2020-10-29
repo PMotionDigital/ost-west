@@ -5,6 +5,7 @@ jQuery(function($) {
     const modalLogin = $('[data-modal="login"]');
     const modalRegister = $('[data-modal="register"]');
     const noteForm = $('.note-form');
+    const noteFormText = noteForm.find('.note-form_text');
     const registerForm = $('#pt_registration_form');
     const formBtn = registerForm.find('button[type="submit"]');
 
@@ -33,10 +34,16 @@ jQuery(function($) {
 
                 let jsonOutput = JSON.parse(response);
                 let respMessage = jsonOutput.error;
+                let okMessage = jsonOutput.status;
 
-                noteForm.html('');
+                noteFormText.html('');
                 noteForm.addClass('open');
-                noteForm.html(respMessage);
+
+                if(okMessage == 'ok') {
+                    noteFormText.html('Успешно! Перенаправляем в личный кабинет');                    
+                } else {
+                    noteFormText.html(respMessage);
+                }
 
                 modalRegister.removeClass('open');
                 modalLogin.addClass('open');

@@ -1,47 +1,4 @@
-.watch{
-    .programm{
-        padding: 0;
-        .slick-slide{
-            width: 16.2rem;
-            margin: 0 .25rem;
-        }
-    
-        .slick-list{
-            margin: 0 4rem;
-        }
-        
-        .slick-arrow{
-            top: 50%;
-        }
 
-        .slick-next{
-            transform: translateY(-50%) rotate(135deg);
-        }
-
-        .slick-prev{
-            transform: translateY(-50%) rotate(-45deg);
-        }
-    
-        .programm-list_item-image{
-            height: 9rem;
-        }
-
-        .programm-list_item-desc{
-            display: none;
-        }
-
-        .programm-list_item:hover{
-            transform: none;
-            &::before{
-                display: none;
-            }
-        }
-
-        .section-title{
-            display: none;
-        }
-    }
-}
 
 .selected-programm {
     background-color: #e697e3;

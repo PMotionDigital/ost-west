@@ -1,9 +1,9 @@
 <?php /* Template Name: Страница - программы */ get_header(); ?>
-    <section class="programms col-lg-12">
-        <div class="programms_modal" data-programms-modal>
+    <section class="programm col-lg-12">
+        <!--<div class="programms_modal" data-programms-modal>
             <div class="modal-content"></div>
             <div class="modal-wrapper"></div>
-        </div>
+        </div>-->
         <div class="programms_wrapper">
             <div class="dis-flex justify-content-center">
                 <div class="col-lg-11">
@@ -81,11 +81,11 @@
                         <img src="<?php echo $post_image; ?>">
                     </div>
                     <div class="programm-list_item-desc text-block">
-                        <h3><?php the_title(); ?></h3>
-                        <?php the_excerpt(); ?>
+                        <h3><?php echo get_the_title($item); ?></h3>
+                        <p><?php echo $item->snippet->description; ?></p>
                         <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
-                            <a href="<?php the_permalink(); ?>" class="button type-2">Эпизоды</a>
+                            <a href="https://www.youtube.com/watch?v=CQ0CjQbXfas&list=<?php echo get_field('playlist_id', $item); ?>" target="_blank" class="button type-2">Смотреть</a>
+                            <a href="<?php echo get_permalink($item) ?>" class="button type-2">Эпизоды</a>
                         </div>
                     </div>
                 </button>

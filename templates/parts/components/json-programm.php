@@ -1,8 +1,8 @@
 <?php
     ob_start();
     echo do_shortcode('[table id=2 /]');
-    $json_programms = ob_get_clean();
-    $json_programms = json_decode($json_programms);
+    $table_programms = ob_get_clean();
+    $json_programms = json_decode($table_programms);
 
     $new_data = array();
 
@@ -13,7 +13,6 @@
     foreach($json_programms as $count => $pr){
         if($count !== 0) {
             $title = $json_programms[0];
-            // = 0;
             $new_item = array();
             foreach($pr as $sub_count => $program) {
                 

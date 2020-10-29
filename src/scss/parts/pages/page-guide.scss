@@ -78,6 +78,10 @@
     border-radius: .5rem;
     margin-left: 1rem;
 
+    .item_content {
+        display: none;
+    }
+
     .item_time{
         color: $purple;
         margin-right: 1.5rem;
@@ -110,7 +114,10 @@
 [data-modal="details"] {
     .item_content-item {
         justify-content: space-between;
-        margin-bottom: 1rem;
+        
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
         .name,
         .value {
             display: inline;

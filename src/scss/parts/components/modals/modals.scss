@@ -24,8 +24,12 @@
         background-color: $white;
         position: relative;
         z-index: 1;
+        max-height: 90%;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none; 
+        }
     }
-
     form {
         display: grid;
         grid-template-columns: repeat(1,1fr);

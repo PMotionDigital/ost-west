@@ -4,6 +4,13 @@ get_header();
 
 global $current_user;
 $cur_user_id = get_current_user_id();
+
+if(get_field('аватар_пользователя', 'user_'. $current_user->ID )) {
+    $profile_image = get_field('аватар_пользователя', 'user_'. $current_user->ID );
+} else {
+    $profile_image = get_template_directory_uri().'/src/img/placeholder-ava.jpg';
+}
+
 ?>
 <section class="user-profile page-default dis-flex justify-content-center">
     <?php if (is_user_logged_in()) { ?>
@@ -18,7 +25,7 @@ $cur_user_id = get_current_user_id();
             <form class="data-fields_form" id="data-fields_form" action="update_user_profile" method="post" enctype="multipart/form-data">
                 <div class="data-fields_pic data-fields_wrap">
                     <div class="data-fields_pic-wrap">
-                        <img src="<?php echo get_field('аватар_пользователя', 'user_'. $current_user->ID ); ?>" alt="<?php echo $user_info->user_login; ?>">
+                        <img src="<?php echo $profile_image; ?>" alt="<?php echo $user_info->user_login; ?>">
                     </div>
                     <div class="pic-wrap_text">Загрузить фото</div>
                 </div>
@@ -46,10 +53,12 @@ $cur_user_id = get_current_user_id();
             </div>
             <div class="tariff-list">
                 <?php if(have_rows('список_тарифов', 'option')): ?>
-	            <?php while(have_rows('список_тарифов', 'option')): the_row(); ?>  
+                <?php $counter = 1; ?>
+                <?php while(have_rows('список_тарифов', 'option')): the_row(); ?>  
+                <?php $tariff_name = get_sub_field('наименование_тарифа'); ?>
                 <div class="tariff-list_item tariff-item">
                     <div class="tariff-item_title">
-                        <?php the_sub_field('наименование_тарифа'); ?>
+                        <?php echo $tariff_name; ?>
                     </div>
                     <div class="empty--div">
                         <div class="tariff-item_price">
@@ -57,7 +66,11 @@ $cur_user_id = get_current_user_id();
                         </div>
                         <button data-modal-btn="pay" class="button type-1" data-choose-tariff>Выбрать тариф</button>
                     </div>
+                    <div class="tariff-item_pay" style="display:none !important;">
+                        <?php echo do_shortcode('[wp_paypal button="buynow" product_name="'. $tariff_name .'" prod_type="tariff_'. $counter .'"]'); ?>
+                    </div>
                 </div>
+                <?php $counter++; ?>
                 <?php endwhile; ?>
 	            <?php endif; ?>
             </div>
@@ -65,30 +78,6 @@ $cur_user_id = get_current_user_id();
                 <h2>История платежей</h2>
             </div>
             <div class="payment-history">
-                <div class="payment-history_item">
-                    <div class="payment-history_item_date">
-                        16.03.2020 - 16.03.2020
-                    </div>
-                    <div class="payment-history_item_name">
-                        Подписка на месяц
-                    </div>
-                </div>
-                <div class="payment-history_item">
-                    <div class="payment-history_item_date">
-                        16.03.2020 - 16.03.2020
-                    </div>
-                    <div class="payment-history_item_name">
-                        Подписка на месяц
-                    </div>
-                </div>
-                <div class="payment-history_item">
-                    <div class="payment-history_item_date">
-                        16.03.2020 - 16.03.2020
-                    </div>
-                    <div class="payment-history_item_name">
-                        Подписка на месяц
-                    </div>
-                </div>
                 <div class="payment-history_item">
                     <div class="payment-history_item_date">
                         16.03.2020 - 16.03.2020
@@ -109,7 +98,7 @@ $cur_user_id = get_current_user_id();
         wp_redirect( '/' );
     } ?>
 </section>
-<div style="display:none;">
+<div style="display:none!important;">
 <?php
     $user = wp_get_current_user();
     $role = ( array )$user->roles;

@@ -21,7 +21,14 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
         <?php get_template_part('templates/parts/section-programm'); ?>
         <div class="watch_selected selected-programm dis-flex">
             <div class="selected-programm_image col-lg-4">
-                <img src="https://images.unsplash.com/photo-1579894059380-1866b68bce6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+                <?php 
+                    if(get_the_post_thumbnail_url()) {
+                        $post_image = get_the_post_thumbnail_url();
+                    } else {
+                        $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
+                    }
+                ?>
+                <img src="<?php echo $post_image; ?>">
             </div>
             <div class="selected-programm_desc text-block col-lg-4">
                 <h1 class="section-title type-1"><?php echo $playlists->items[0]->snippet->title; ?></h1>

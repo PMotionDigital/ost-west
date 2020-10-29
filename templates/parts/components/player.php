@@ -18,9 +18,9 @@
         $res = $wpdb->get_row($sql, OBJECT, 0);
         return $res->its_work;
     }
-    if(is_subscribe_work($user_id)) {
+    if(is_subscribe_work($user_id) && is_user_logged_in()) {
         get_template_part('templates/parts/online-stream');
     } else {
-        echo 'net podpiski';
+        get_template_part('templates/parts/get-subscribe');
     }
 ?>

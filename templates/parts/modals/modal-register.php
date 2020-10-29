@@ -11,6 +11,13 @@
             <div class="form-field">
                 <input placeholder="e-mail" name="pt_user_email" type="email"/>
             </div>
+            <div class="form-field">
+                <input placeholder="Введите пароль" type="password" class="required" name="user_password" >
+            </div>
+
+            <div class="form-field">
+                <input placeholder="Подтвердите пароль" type="password" class="required" name="password2">
+            </div>
 
             <div class="form-field form-footer">
                 <input type="hidden" name="action" value="pt_register_member" />

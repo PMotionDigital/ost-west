@@ -6,6 +6,15 @@ function pt_register_member() {
   		// Get variables
 		$user_login	= $_POST['pt_user_login'];	
 		$user_email	= $_POST['pt_user_email'];
+		$user_password = $_POST['user_password'];
+		$user_data = array(
+			'user_login' => $user_login,
+			'user_email' => $user_email,
+			'user_pass' => $user_password
+		);
+
+		$user_id = wp_insert_user($user_data);
+
 		$error = array();
 		
 		// Check CSRF token
@@ -17,10 +26,9 @@ function pt_register_member() {
 	 	// Check if input variables are empty
 	 	elseif( empty($user_login) || empty($user_email) ){
 			$error[] = __('Пожалуйста, заполните все поля', 'ptheme');
+			$status = 'error';
 			die();
-	 	}
-		
-		$errors = register_new_user($user_login, $user_email);	
+	 	}	
 		
 		if( is_wp_error($errors) ){
 
@@ -36,12 +44,15 @@ function pt_register_member() {
 
 			$error[] = $display_errors;
 
-		} else {
+		} else { 
 			$error[] = __( 'Вы успешно прошли регистрацию! Пожалуйста, проверьте свою почту e-mail.', 'ptheme');
+			$status = 'ok';
 		}
 	 
 		echo json_encode(array(
-			'error' => $error
+			'error' => $error,
+			'pass' => $user_password,
+			'status' => $status
 		));
 
 	 	die();

@@ -4,8 +4,7 @@
         <div class="online-tv col-lg-11 dis-flex flex-wrap-wrap">
             <div class="online-tv_player col-lg-8 col-lm-12 col-xs-12">
                 <?php 
-                    //include '../../functions/func-stream.php';
-                    get_template_part('templates/parts/online-stream');
+                    get_template_part('templates/parts/components/player');
                 ?>
             </div>
             <div class="online-tv_timetable col-lg-4 col-lm-12 col-xs-12">
@@ -33,7 +32,21 @@
                         <h4 class="item_title">
                         <?php echo $programm_item['Название фильма']; ?>
                         </h4>
-                        <a href="#" data-modal-btn="details" class="button detail">Подробнее</a>
+                        <button data-modal-btn="details" class="button detail">Подробнее</button>
+                    </div>
+                    <div class="item_content">
+                        <?php 
+                        foreach($programm_item as $key => $value):
+                            if($value != '' && $key != 'ID'):
+                                ?>
+                                <div class="item_content-item">
+                                    <div class="name"><?php echo $key; ?>:</div>
+                                    <div class="value"><?php echo $value; ?></div>
+                                </div> 
+                                <?php
+                            endif;
+                        endforeach;
+                        ?>
                     </div>
                 </div>
                 <?php       
@@ -54,7 +67,7 @@
             <div class="dis-grid grid-col-lg-4 grid-col-xs-1 grid-gap-1">
                 <?php
                     $posts = get_posts(array(
-                        'posts_per_page'	=> -1,
+                        'posts_per_page'	=> 4,
                         'post_type'         => 'post',
                         'cat'               => $category_id,
                         'category__not_in'  => array(4,5)
@@ -72,4 +85,5 @@
         </div>
     </div>
 </div>
+<?php get_template_part('templates/parts/modals/modal-details'); ?>
 <?php get_footer(); ?>
