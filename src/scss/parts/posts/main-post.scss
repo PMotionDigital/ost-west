@@ -12,6 +12,13 @@
             color: $purple;
         }
     }
+    &:hover {
+        .main-post_image {
+            img {
+                transform: scale(1.05);
+            }
+        }
+    }
 }
 
 .main-post_desc {
@@ -29,6 +36,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: all .15s ease-in-out;
     }
 }
 
@@ -52,6 +60,9 @@
     .main-post_date,
     .main-post_excerpt {
         color: $white;
+    }
+    .main-post_title {
+        font-weight: bold;
     }
 }
 

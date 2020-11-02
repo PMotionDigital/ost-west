@@ -9,6 +9,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "clipboard": "^2.0.6",
     "jquery": "^3.5.1",
     "slick-carousel": "^1.8.1",
     "wowjs": "^1.1.3"

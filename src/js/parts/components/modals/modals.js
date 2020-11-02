@@ -17,3 +17,4 @@ modalClose.on('click', function() {
     let curModal = $(this).closest('.modal')
     curModal.removeClass('open');
 });
+

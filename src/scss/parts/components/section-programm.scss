@@ -121,6 +121,14 @@
     background-color: transparent;
     color: $white;
     box-shadow: inset 0 -15rem 6rem 0 rgba(0,0,0,0.6);
+    white-space: normal;
+    p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        position: relative;
+        overflow: hidden;
+    }
 }
 
 .programm-list_item-buttons a{
@@ -133,7 +141,7 @@
     .programm {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
     }
     .programm_slider {
         white-space: nowrap;

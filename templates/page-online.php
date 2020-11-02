@@ -1,4 +1,6 @@
-<?php /* Template Name: Страница - прямой эфир */ get_header(); ?>
+<?php /* Template Name: Страница - прямой эфир */ 
+get_header(); 
+?>
 <div class="page-default page-online">
     <div class="programm dis-flex justify-content-center">
         <div class="online-tv col-lg-11 dis-flex flex-wrap-wrap">
@@ -69,7 +71,7 @@
                     $posts = get_posts(array(
                         'posts_per_page'	=> 4,
                         'post_type'         => 'post',
-                        'cat'               => $category_id,
+                        //'cat'               => $category_id,
                         'category__not_in'  => array(4,5)
                     ));
 

@@ -21,11 +21,18 @@
     button {
         display: block;
         height: 1.5rem;
+        width: 1.5rem;
         background: url(../img/icons/user-icon.svg) right center no-repeat;
         background-size: contain;
     }
     .user-stat_name {
+        order: 1;
         color: $purple;
+    }
+    .user-stat_pic {
+        order: 2;
+        margin-right: 0;
+        margin-left: .75rem;
     }
 }
 
@@ -59,6 +66,7 @@
             justify-content: center;
             &:after {
                 left: 0;
+                border-radius: 5rem;
             }
         }
     }

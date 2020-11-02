@@ -1,5 +1,8 @@
 <?php
     
+    global $current_user;
+    $user_id = $current_user->ID;
+
     function is_subscribe_work() {
 
         global $current_user;
@@ -18,7 +21,7 @@
         $res = $wpdb->get_row($sql, OBJECT, 0);
         return $res->its_work;
     }
-    if(is_subscribe_work($user_id) && is_user_logged_in()) {
+    if(is_user_logged_in() && is_subscribe_work($user_id)) {
         get_template_part('templates/parts/online-stream');
     } else {
         get_template_part('templates/parts/get-subscribe');

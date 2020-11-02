@@ -1,3 +1,7 @@
+@media only screen and (min-width: 1650px) { 
+    
+}
+
 // md - medium, notebooks
 @media only screen and (max-width: 1440px) { 
     .col-md-1  { width: 8.33333333%; }
@@ -28,6 +32,12 @@
     .col-lm-10 { width: 83.33333333%; }
     .col-lm-11 { width: 91.66666667%; }
     .col-lm-12 { width: 100%; }
+
+    // global
+    html {
+        font-size: 20px;
+    }
+
 }
 
 // lm - kak siniy LM, tablets

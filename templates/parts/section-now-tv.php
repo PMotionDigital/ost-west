@@ -14,7 +14,7 @@
 
             ?>
 
-            <?php 
+            <?php
                 $first_item = 0;
                 foreach($programm_data as $count => $programm_item) {
                     if( $cur_date == $programm_item['Дата'] && ($cur_time <= date( 'H:i', strtotime($programm_data[$count+1]['Время']))) ) { 

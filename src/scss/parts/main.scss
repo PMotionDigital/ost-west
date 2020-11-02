@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.dis-none {
+    display: none;
+}
+
 button {
     background: none;
     border: none;
@@ -30,22 +34,24 @@ a{
     font-family: "MyriadPro";
     font-style: normal;
     font-weight: normal;
-    src: url(../fonts/MyriadPro-Regular.ttf);
+    src: url('../fonts/MyriadPro-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/MyriadPro-Regular.woff') format('woff') /* Pretty Modern Browsers */
 }
 
 @font-face {
     font-family: "MyriadPro";
-    font-style: bold;
-    font-weight: normal;
-    src: url(../fonts/MyriadPro-Bold.ttf);
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/MyriadPro-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/MyriadPro-Bold.woff') format('woff') /* Pretty Modern Browsers */
 }
 
-@font-face {
-    font-family: "MyriadPro";
-    font-style: 500;
-    font-weight: normal;
-    src: url(../fonts/MyriadPro-Semibold.ttf);
-}
+// @font-face {
+//     font-family: "MyriadPro";
+//     font-style: 500;
+//     font-weight: normal;
+//     src: url(../fonts/MyriadPro-Semibold.ttf);
+// }
 
 html {
     font-size: 1.1vw;
@@ -53,5 +59,6 @@ html {
 
 body {
     font-family: "MyriadPro";
+    font-weight: normal;
     background-color: $greyLight;
 }

@@ -78,14 +78,15 @@ if(get_field('аватар_пользователя', 'user_'. $current_user->ID
                 <h2>История платежей</h2>
             </div>
             <div class="payment-history">
-                <div class="payment-history_item">
+                <!-- <div class="payment-history_item">
                     <div class="payment-history_item_date">
                         16.03.2020 - 16.03.2020
                     </div>
                     <div class="payment-history_item_name">
                         Подписка на месяц
                     </div>
-                </div>
+                </div> -->
+                <?php show_user_subscribes($current_user->ID); ?>
             </div>
         </div>
         <div class="user-info_logout">

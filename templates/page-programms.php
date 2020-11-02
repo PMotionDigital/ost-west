@@ -1,18 +1,10 @@
 <?php /* Template Name: Страница - программы */ get_header(); ?>
-    <section class="programm col-lg-12">
-        <!--<div class="programms_modal" data-programms-modal>
-            <div class="modal-content"></div>
-            <div class="modal-wrapper"></div>
-        </div>-->
-        <div class="programms_wrapper">
-            <div class="dis-flex justify-content-center">
-                <div class="col-lg-11">
-                    <div class="section-title type-1 margin-b-1">
-                        <h2>Наши программы</h2>
-                    </div>
-                </div>
+    <section class="programm dis-flex flex-direction-col align-items-center">
+        <div class="programms_wrapper col-lg-11">
+            <div class="section-title type-1 margin-b-1">
+                <h2>Наши программы</h2>
             </div>
-            <div class="programms_list dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1 col-lg-11">
+            <div class="programms_list dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1">
                 <?php
                 $posts = get_posts(array(
                     'posts_per_page'	=> -1,
@@ -49,15 +41,11 @@
 				<?php endif; ?>
             </div>
         </div>
-        <div class="programms_wrapper">
-            <div class="dis-flex justify-content-center">
-                <div class="col-lg-11">
-                    <div class="section-title type-1 margin-b-1">
-                        <h2>Наши репортажи</h2>
-                    </div>
-                </div>
+        <div class="programms_wrapper col-lg-11">
+            <div class="section-title type-1 margin-b-1">
+                <h2>Наши репортажи</h2>
             </div>
-            <div class="programms_list dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1 col-lg-11">
+            <div class="programms_list col-lg-11 dis-grid grid-col-lg-3 grid-col-xs-1 grid-gap-1 col-lg-12">
             <?php
                 $posts = get_posts(array(
                     'posts_per_page'	=> -1,

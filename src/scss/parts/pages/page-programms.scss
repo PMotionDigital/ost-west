@@ -32,6 +32,12 @@
     }
     .programm-list_item-desc{
         //display: none;
+        overflow: hidden;
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
     }
 }
 .programms_list {
@@ -58,4 +64,21 @@
             width: 100%;
         }
     }
+
+    body.page-template-page-programms {
+        .programm-list_item,
+        .programm-list_item-image {
+            height: auto;
+            
+        }
+        .programm-list_item-image {
+            img {
+                width: 100%;
+                position: relative;
+                object-fit: inherit;
+                height: auto;
+            }
+        }
+    }
+
 }

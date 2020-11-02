@@ -1,5 +1,8 @@
 <?php 
     get_header(); 
+
+    global $post;
+
     $categories = get_the_category();
     $category_id = $categories[0]->cat_ID;
 ?>
@@ -31,11 +34,21 @@
             <div class="single-post_val">
                 <?php the_content(); ?>
             </div>
+            <div class="single-post_footer post-footer">
+                <div class="post-footer_share col-lm-12 col-xs-12">
+                    <script src="https://yastatic.net/share2/share.js"></script>
+                    <div class="ya-share2" data-curtain data-size="l" data-services="vkontakte,facebook,odnoklassniki,telegram,twitter"></div>
+                </div>
+                <div class="post-footer_link col-lm-12 col-xs-12">
+                    <span id="copy-link" class="copied-text"><?php echo get_the_permalink($post->ID); ?></span>
+                    <button class="button copied-text-btn" data-clipboard-target="#copy-link">Скопировать ссылку</button>
+                </div>
+            </div>
         </div>
         <div class="single-post_sidebar">
         <?php
             $posts = get_posts(array(
-                'posts_per_page'	=> -1,
+                'posts_per_page'	=> 3,
                 'post_type'         => 'post',
                 'cat'               => $category_id,
                 'category__not_in'  => array(4,5)

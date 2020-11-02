@@ -10,9 +10,9 @@
 .nowtv_title {
     color: $purple;
     white-space: nowrap;
-    padding-right: 2.5rem;
+    padding-right: 1.5rem;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .nowtv_list {
@@ -37,6 +37,7 @@
 @media only screen and (max-width: 768px) { 
     .nowtv_title {
         padding-right: 1rem;
+        font-size: 1.3rem;
     }
     .nowtv_list {
         overflow-x: scroll;
@@ -47,5 +48,6 @@
     }
     .nowtv_list-item {
         display: inline-block;
+        font-size: 1.3rem;
     }
 }

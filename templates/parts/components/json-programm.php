@@ -1,9 +1,7 @@
 <?php
-    ob_start();
-    echo do_shortcode('[table id=2 /]');
-    $table_programms = ob_get_clean();
-    $json_programms = json_decode($table_programms);
 
+    $json_programms = TablePress::$model_table->load(2)['data'];
+    
     $new_data = array();
 
     $programm_time = array();

@@ -23,6 +23,9 @@ button{
     text-decoration: none;
     position: relative;
     cursor: pointer;
+    &:hover {
+        background-color: rgba($purple, .85);
+    }
     &.type-1 {
         background-color: transparent;
         border: 2px solid $purple;
@@ -66,5 +69,11 @@ button{
         &::selection {
             background: none;
         }
+    }
+}
+
+@media only screen and (max-width: 768px) { 
+    .button {
+        padding: .75rem 1.2rem;
     }
 }

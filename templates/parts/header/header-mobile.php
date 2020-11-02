@@ -8,7 +8,7 @@
     <div class="header-burger col-lg-4" data-header-burger>
         <button class="header-burger_icon"></button>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 dis-flex justify-content-center">
         <div class="header-top_logo">
             <a href="/">
                 <img src="<?php bloginfo('template_url') ?>/dist/img/logo.png">
@@ -39,7 +39,7 @@
             </div>
         </a>
         <?php } else { ?>
-        <button class="button" data-modal-btn="login">Войти</button>
+        <button data-modal-btn="login"></button>
         <?php } ?>
         
     </div>

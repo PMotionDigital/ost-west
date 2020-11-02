@@ -26,11 +26,11 @@ function ps_redirect_after_logout(){
 
 // remove dash panel
 
-$user = wp_get_current_user();
-$role = ( array )$user->roles;
-$role = $role[0];
-if ($role === "subscriber") {
-    add_filter('show_admin_bar', '__return_false');
-}        
+function disable_admin_bar() { 
+    if ( current_user_can('subscriber') ) {
+        add_filter('show_admin_bar', '__return_false'); 
+    }
+}      
+add_action( 'after_setup_theme', 'disable_admin_bar' );
 
 ?>

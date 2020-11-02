@@ -14,8 +14,8 @@
         <button type="button" class="programm-list_item">
             <div class="programm-list_item-image">
                 <?php 
-                    if(get_the_post_thumbnail_url()) {
-                        $post_image = get_the_post_thumbnail_url();
+                    if(get_the_post_thumbnail_url($item)) {
+                        $post_image = get_the_post_thumbnail_url($item, 'large');
                     } else {
                         $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
                     }
@@ -24,9 +24,10 @@
             </div>
             <div class="programm-list_item-desc text-block">
                 <h3><?php echo get_the_title($item); ?></h3>
-                <p><?php echo $item->snippet->description; ?></p>
+                
+                <?php str_word_count(the_field('описание_плейлиста', $item), 1); ?>
                 <div class="programm-list_item-buttons">
-                    <a data-pizda="<?php the_field('playlist_id', $item); ?>" href="https://www.youtube.com/watch?v=CQ0CjQbXfas&list=<?php echo get_field('playlist_id', $item); ?>" target="_blank" class="button type-2">Смотреть</a>
+                    <a href="<?php the_field('ссылка_на_плейлист'); ?>" target="_blank" class="button type-2">Смотреть</a>
                     <a href="<?php echo get_permalink($item) ?>" class="button type-2">Эпизоды</a>
                 </div>
             </div>
