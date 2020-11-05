@@ -65,12 +65,9 @@
                 <div class="services_form-title">
                     Пишите нам на почту <a href="mailto:info@ostwest.tv">info@ostwest.tv</a> или используйте форму обратной связи
                 </div>
-                <form class="services_form">
-                    <input type="text" placeholder="Имя" name="name">
-                    <input type="email" placeholder="Email" name="Email">
-                    <textarea name="message" placeholder="Сообщение"></textarea>
-                    <input type="submit" value="Отправить">
-                </form>
+                <div class="services_form">
+                    <?php echo do_shortcode('[contact-form-7 id="339" title="Форма обратной связи"]'); ?>
+                </div>
             </div>
         </div>
     </section>

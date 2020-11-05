@@ -72,7 +72,7 @@ get_header();
                         'posts_per_page'	=> 4,
                         'post_type'         => 'post',
                         //'cat'               => $category_id,
-                        'category__not_in'  => array(4,5)
+                        'category__not_in'  => array(2,3) ,
                     ));
 
                     foreach ($posts as $post) {

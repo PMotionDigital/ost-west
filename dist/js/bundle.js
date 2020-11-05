@@ -16351,6 +16351,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_components_block_programms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./parts/components/block-programms */ "./src/js/parts/components/block-programms.js");
 /* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./parts/components/note-form */ "./src/js/parts/components/note-form.js");
 /* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./parts/components/cookie-message */ "./src/js/parts/components/cookie-message.js");
+/* harmony import */ var _parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16__);
 // files
 // import './parts/test';
 // //
@@ -16379,6 +16381,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // blocks
+
 
 
 
@@ -16429,6 +16432,35 @@ sliderProgramm.slick({
         // instead of a settings object
     ]
 })
+
+/***/ }),
+
+/***/ "./src/js/parts/components/cookie-message.js":
+/*!***************************************************!*\
+  !*** ./src/js/parts/components/cookie-message.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(jQuery) {jQuery(document).ready(function($) {
+
+    const cookieMessage = $('[data-cookie-message]');
+    const cookieClose = $('.cookie-message_close');
+
+    if (localStorage.getItem('cookie-message') == 'showed') {
+        
+    } else if (localStorage.getItem('cookie-message') == null) {
+    	setTimeout(function(){
+            cookieMessage.addClass('cookie-message--show');
+        }, 1500);
+        localStorage.setItem('cookie-message', 'showed');
+    }	
+
+    cookieClose.click(function() {
+    	cookieMessage.removeClass('cookie-message--show');
+    });
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -16667,6 +16699,7 @@ jQuery(function($) {
 /* WEBPACK VAR INJECTION */(function($) {// Общие правила логики абсолютно для всех модалок
 
 const modal = $('.modal[data-modal]');
+const modalWrap = modal.find('.modal_wrap');
 const modalBtn = $('[data-modal-btn]');
 const modalClose = $('[data-modal-close]');
 
@@ -16682,6 +16715,9 @@ modalBtn.on('click', function(e) {
 modalClose.on('click', function() {
     let curModal = $(this).closest('.modal')
     curModal.removeClass('open');
+    setTimeout(function() {
+        modalWrap.html('');
+    },250);
 });
 
 
@@ -16862,7 +16898,7 @@ jQuery(function($){
 
     userCountrySelect.countrySelect({
         defaultCountry: currentSlug,
-        onlyCountries: ['us', 'ru', 'de', 'en'],
+        //onlyCountries: ['us', 'ru', 'de', 'en'],
         responsiveDropdown: true,
     });
 

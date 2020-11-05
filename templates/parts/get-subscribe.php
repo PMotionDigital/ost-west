@@ -7,12 +7,17 @@
     <div class="tariff-list_item tariff-item">
         <div class="tariff-item_title">
             <?php the_sub_field('наименование_тарифа'); ?>
+            <span class="sub-title">*Первый месяц бесплатно</span>
         </div>
         <div class="empty--div">
             <div class="tariff-item_price">
                 <?php the_sub_field('стоимость_тарифа'); ?>€
             </div>
+            <?php if (!is_user_logged_in()) { ?>
             <button data-modal-btn="login" class="button type-1">Выбрать тариф</button>
+            <?php } else { ?>
+            <a href="/profile/" class="button type-1">Выбрать тариф</a>
+            <?php } ?>
         </div>
     </div>
     <?php endwhile; ?>

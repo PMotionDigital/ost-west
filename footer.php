@@ -5,7 +5,7 @@
 			</div>
 			<div class="main-footer_copypaste col-lg-5 col-lm-12 col-xs-12">
 				<p>© 2018 OstWest Berlin. При использовании текстовых материалов с сайта активная ссылка на OstWest.tv обязательна
-				Копирование видео материалов запрещено. Политика конфиденциальности.</p>
+				Копирование видео материалов запрещено. <a href="/polit_conf">Политика конфиденциальности.</a></p>
 			</div>
 			<div class="main-footer_socials col-lg-3 col-lm-12 col-xs-12">
 				<?php get_template_part('templates/parts/components/socials'); ?>
@@ -16,6 +16,10 @@
 		<span class="note-form_close"></span>
 		<div class="note-form_text"></div>
 	</div>
+	<div class="cookie-message" data-cookie-message>
+		Diese Webseite verwendet Cookies. Hier <a href="/datenschutzerklarung">klicken für mehr Informationen. Schlissen</a>
+		<div class="cookie-message_close"></div>
+    </div>
 	<?php 
 	if (!is_user_logged_in()) {
 		get_template_part('templates/parts/modals/modal-login');

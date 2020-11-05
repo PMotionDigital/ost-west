@@ -3,7 +3,6 @@
 .selected-programm {
     background-color: #e697e3;
     color: $white;
-    padding: 1.5rem 4rem;
 }
 
 .selected-programm_image{
@@ -28,13 +27,13 @@
 
 .episodes_list{
     margin: 0 auto;
-    padding: 1.5rem 0;
+    display: grid;
+    grid-template-columns: repeat(4,4fr);
+    grid-gap: 2rem;
 }
 
 .episode{
-    width: 19.5rem;
     display: block;
-    margin: 0 1.2rem 1.2rem 0;
     color: $white;
     text-align: left;
 }
@@ -62,4 +61,13 @@
     // white-space: nowrap;
     // overflow: hidden;
     // text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 768px) { 
+    .episodes_list{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .episode_image {
+        height: auto;
+    }
 }

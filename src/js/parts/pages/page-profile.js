@@ -25,7 +25,7 @@ jQuery(function($){
 
     userCountrySelect.countrySelect({
         defaultCountry: currentSlug,
-        onlyCountries: ['us', 'ru', 'de', 'en'],
+        //onlyCountries: ['us', 'ru', 'de', 'en'],
         responsiveDropdown: true,
     });
 

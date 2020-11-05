@@ -72,6 +72,10 @@ button{
     }
 }
 
+.alm-load-more-btn {
+    background-color: $purple !important;
+}
+
 @media only screen and (max-width: 768px) { 
     .button {
         padding: .75rem 1.2rem;

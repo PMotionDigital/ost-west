@@ -59,6 +59,7 @@ if(get_field('аватар_пользователя', 'user_'. $current_user->ID
                 <div class="tariff-list_item tariff-item">
                     <div class="tariff-item_title">
                         <?php echo $tariff_name; ?>
+                        <span class="sub-title">*Первый месяц бесплатно</span>
                     </div>
                     <div class="empty--div">
                         <div class="tariff-item_price">

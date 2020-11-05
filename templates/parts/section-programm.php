@@ -27,7 +27,7 @@
                 
                 <?php str_word_count(the_field('описание_плейлиста', $item), 1); ?>
                 <div class="programm-list_item-buttons">
-                    <a href="<?php the_field('ссылка_на_плейлист'); ?>" target="_blank" class="button type-2">Смотреть</a>
+                    <a href="<?php the_field('ссылка_на_плейлист', $item); ?>" target="_blank" class="button type-2">Смотреть</a>
                     <a href="<?php echo get_permalink($item) ?>" class="button type-2">Эпизоды</a>
                 </div>
             </div>

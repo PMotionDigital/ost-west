@@ -19,8 +19,8 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
 </h1> -->
     <section class="watch">
         <?php get_template_part('templates/parts/section-programm'); ?>
-        <div class="watch_selected selected-programm dis-flex">
-            <div class="selected-programm_image col-lg-4">
+        <div class="watch_selected selected-programm dis-flex flex-wrap-wrap">
+            <div class="selected-programm_image col-lg-4 col-xs-12">
                 <?php 
                     if(get_the_post_thumbnail_url()) {
                         $post_image = get_the_post_thumbnail_url();
@@ -30,10 +30,10 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
                 ?>
                 <img src="<?php echo $post_image; ?>">
             </div>
-            <div class="selected-programm_desc text-block col-lg-4">
-                <h1 class="section-title type-1"><?php echo $playlists->items[0]->snippet->title; ?></h1>
+            <div class="selected-programm_desc text-block col-lg-4 col-xs-12">
+                <h1 class="section-title type-1"><?php the_title(); ?></h1>
                 <p>
-                <?php echo $playlists->items[0]->snippet->description; ?>
+                <?php the_field('описание_плейлиста'); ?>
                 </p>
             </div>
         </div>

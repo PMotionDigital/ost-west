@@ -1,6 +1,7 @@
 // Общие правила логики абсолютно для всех модалок
 
 const modal = $('.modal[data-modal]');
+const modalWrap = modal.find('.modal_wrap');
 const modalBtn = $('[data-modal-btn]');
 const modalClose = $('[data-modal-close]');
 
@@ -16,5 +17,8 @@ modalBtn.on('click', function(e) {
 modalClose.on('click', function() {
     let curModal = $(this).closest('.modal')
     curModal.removeClass('open');
+    setTimeout(function() {
+        modalWrap.html('');
+    },250);
 });
 

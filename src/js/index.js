@@ -28,3 +28,4 @@ import './parts/pages/single-post';
 // blocks
 import './parts/components/block-programms';
 import './parts/components/note-form';
+import './parts/components/cookie-message';

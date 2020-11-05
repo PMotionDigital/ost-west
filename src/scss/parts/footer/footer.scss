@@ -9,6 +9,13 @@
     font-weight: bold;
 }
 
+.main-footer_copypaste {
+    a {
+        color: $purple;
+        border-bottom: 2px solid rgba($purple, .85);
+    }
+}
+
 @media only screen and (max-width: 768px) { 
     .main-footer {
         .wrapper {
