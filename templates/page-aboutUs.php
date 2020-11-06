@@ -1,6 +1,6 @@
 <?php /* Template Name: Страница - О нас */ get_header(); ?>
     <section class="about-us">
-        <div class="about-us_intro dis-flex flex-direction-col align-items-center intro col-lg-12">
+        <div class="about-us_intro about-intro dis-flex flex-direction-col align-items-center intro col-lg-12">
             <div class="intro_title col-lg-11">
                 <h1>OstWest -</h1>
             </div>
@@ -8,6 +8,9 @@
                 <div class="dis-grid grid-col-lg-2 grid-col-xs-1 grid-gap-1 col-lg-8 col-xs-12 col-lm-12">
                     <?php the_field('первый_блок_текст'); ?>
                 </div>
+            </div>
+            <div class="about-intro_bg">
+                <img src="https://liveberlin.ru/wp-content/uploads/2016/12/Berlin_Panorama_Mitte-cover.jpg">
             </div>
         </div>
         <?php if(have_rows('блок_наши_партнеры')): ?>

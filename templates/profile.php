@@ -107,7 +107,7 @@ if(get_field('аватар_пользователя', 'user_'. $current_user->ID
     $role = $role[0];
     $options = array(
     'post_id' => 'user_' . $current_user->ID,
-    'field_groups' => array(5) ,
+    'field_groups' => array(291) ,
     'submit_value' => 'Update'
     );
     acf_form($options);       

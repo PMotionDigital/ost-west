@@ -40,7 +40,7 @@ jQuery(function($) {
                 noteForm.addClass('open');
 
                 if(okMessage == 'ok') {
-                    noteFormText.html('Успешно! Перенаправляем в личный кабинет');                    
+                    noteFormText.html('Спасибо за регистрацию, теперь вы можете войти!');                    
                 } else {
                     noteFormText.html(respMessage);
                 }

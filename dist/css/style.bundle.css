@@ -2220,6 +2220,9 @@ input, textarea {
   visibility: hidden;
   pointer-events: none;
   z-index: 99; }
+  .note-form a {
+    color: #804284;
+    border-bottom: 2px solid rgba(128, 66, 132, 0.5); }
   .note-form.open {
     opacity: 1;
     transform: translateY(0);
@@ -2293,16 +2296,6 @@ input, textarea {
   .alm-reveal .main-post:nth-of-type(4n) .main-post_desc {
     order: 1; }
 
-@media only screen and (max-width: 768px) {
-  .main-posts,
-  .alm-reveal {
-    grid-template-columns: repeat(1, 1fr);
-    grid-column: 1/1;
-    grid-gap: 0; }
-    .main-posts .main-post,
-    .alm-reveal .main-post {
-      margin-bottom: 1rem; } }
-
 .main-post {
   position: relative;
   border-radius: 0.75rem;
@@ -2365,15 +2358,27 @@ input, textarea {
     font-weight: bold !important; }
 
 @media only screen and (max-width: 768px) {
-  .main-posts .main-post:nth-of-type(4n + 1) .main-post_image, .main-posts .main-post:nth-of-type(4n) .main-post_image {
-    width: 100%;
-    height: 30vh; }
-  .main-posts .main-post:nth-of-type(4n + 1) .main-post_desc, .main-posts .main-post:nth-of-type(4n) .main-post_desc {
-    width: 100%; }
-  .main-posts .main-post:nth-of-type(4n) .main-post_image {
-    order: 1; }
-  .main-posts .main-post:nth-of-type(4n) .main-post_desc {
-    order: 2; } }
+  .main-posts,
+  .alm-reveal {
+    display: block; }
+    .main-posts .main-post:not(:last-child),
+    .alm-reveal .main-post:not(:last-child) {
+      margin-bottom: 1rem; }
+    .main-posts .main-post:nth-of-type(4n + 1) .main-post_image, .main-posts .main-post:nth-of-type(4n) .main-post_image,
+    .alm-reveal .main-post:nth-of-type(4n + 1) .main-post_image,
+    .alm-reveal .main-post:nth-of-type(4n) .main-post_image {
+      width: 100%;
+      height: 30vh; }
+    .main-posts .main-post:nth-of-type(4n + 1) .main-post_desc, .main-posts .main-post:nth-of-type(4n) .main-post_desc,
+    .alm-reveal .main-post:nth-of-type(4n + 1) .main-post_desc,
+    .alm-reveal .main-post:nth-of-type(4n) .main-post_desc {
+      width: 100%; }
+    .main-posts .main-post:nth-of-type(4n) .main-post_image,
+    .alm-reveal .main-post:nth-of-type(4n) .main-post_image {
+      order: 1; }
+    .main-posts .main-post:nth-of-type(4n) .main-post_desc,
+    .alm-reveal .main-post:nth-of-type(4n) .main-post_desc {
+      order: 2; } }
 
 .page-breadcrumbs {
   grid-column: 1/8;
@@ -2473,6 +2478,50 @@ input, textarea {
 .modal-watch .modal_wrap {
   padding: .5rem; }
 
+.modal-login .modal-social {
+  display: none; }
+
+.modal-login .modal-login_social {
+  margin-bottom: 1rem; }
+
+.google-button {
+  height: 40px;
+  border-width: 0;
+  background: white;
+  color: #737373;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding: 0; }
+  .google-button:focus, .google-button:hover {
+    box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1); }
+  .google-button:active {
+    background-color: #e5e5e5;
+    box-shadow: none;
+    transition-duration: 10ms; }
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box; }
+
+.google-button__icon--plus {
+  width: 27px; }
+
+.google-button__text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto',arial,sans-serif; }
+
 .page-default {
   margin-top: 2.5rem; }
 
@@ -2541,6 +2590,9 @@ input, textarea {
   cursor: pointer;
   margin-top: 1rem;
   font-size: 1.1rem; }
+
+.country-select .flag {
+  background-image: url(../img/flags.png); }
 
 .user-info_subscribe {
   grid-column: 3/6; }
@@ -2729,19 +2781,40 @@ input, textarea {
   background-color: #fff; }
 
 .intro {
-  background: url("https://liveberlin.ru/wp-content/uploads/2016/12/Berlin_Panorama_Mitte-cover.jpg") 0 0 no-repeat;
-  background-size: cover;
   padding: 5rem 0;
-  color: #fff; }
+  color: #fff;
+  position: relative;
+  overflow: hidden; }
+
+.about-intro_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .about-intro_bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%); }
 
 .intro_title {
   font-size: 2rem;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1; }
 
-.intro_desc p {
-  padding-right: 3.5rem;
-  margin-bottom: 2rem;
-  font-size: 1.2rem; }
+.intro_desc {
+  position: relative;
+  z-index: 1; }
+  .intro_desc p {
+    padding-right: 3.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem; }
 
 .partners {
   padding: 1rem 0;

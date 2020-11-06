@@ -51,6 +51,7 @@
                 'posts_per_page'	=> 3,
                 'post_type'         => 'post',
                 'cat'               => $category_id,
+                'post__not_in'      => array($post->ID),
                 'category__not_in'  => array(4,5)
             ));
 

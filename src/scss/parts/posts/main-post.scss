@@ -80,8 +80,13 @@
 }
 
 @media only screen and (max-width: 768px) {  
-    .main-posts {
+    .main-posts,
+    .alm-reveal {
+        display: block;
         .main-post {
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
             &:nth-of-type(4n + 1),
             &:nth-of-type(4n) {
                 .main-post_image {

@@ -16504,12 +16504,19 @@ const emptyBtn = $('[data-modal-btn="empty"]');
 const modalEmpty = $('[data-modal="empty"] .modal_wrap');
 const itemContent = $('[data-modal-content="content"]');
 const itemContentParent = $('[data-modal-content="parent"'); // создаем ближайшего родителя, чтобы найти элемент с контентом
+const modalClose = modalEmpty.siblings('[data-modal-close]');
 
 emptyBtn.on('click', function() {
     let content = $(this).closest(itemContentParent).find(itemContent).html();
     modalEmpty.html(content);
 
     console.log(content);
+});
+
+modalClose.on('click', function() {
+    setTimeout(function() {
+        modalEmpty.html('');
+    },250);
 });
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
@@ -16535,7 +16542,16 @@ jQuery(function($){
     const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
+    const socialLogin = $('[data-modal-login="social"]');
+    const miniOrange = $('.btn-social.btn-google')
 
+
+    // логинимся через гугл
+    socialLogin.on('click', function() {
+        miniOrange.trigger('click');
+    });
+
+    // логинимся через стандартн
 	loginForm.on('submit', function(e) {
 
         e.preventDefault();
@@ -16666,7 +16682,7 @@ jQuery(function($) {
                 noteForm.addClass('open');
 
                 if(okMessage == 'ok') {
-                    noteFormText.html('Успешно! Перенаправляем в личный кабинет');                    
+                    noteFormText.html('Спасибо за регистрацию, теперь вы можете войти!');                    
                 } else {
                     noteFormText.html(respMessage);
                 }
@@ -16699,7 +16715,6 @@ jQuery(function($) {
 /* WEBPACK VAR INJECTION */(function($) {// Общие правила логики абсолютно для всех модалок
 
 const modal = $('.modal[data-modal]');
-const modalWrap = modal.find('.modal_wrap');
 const modalBtn = $('[data-modal-btn]');
 const modalClose = $('[data-modal-close]');
 
@@ -16715,9 +16730,6 @@ modalBtn.on('click', function(e) {
 modalClose.on('click', function() {
     let curModal = $(this).closest('.modal')
     curModal.removeClass('open');
-    setTimeout(function() {
-        modalWrap.html('');
-    },250);
 });
 
 

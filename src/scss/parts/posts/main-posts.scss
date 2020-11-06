@@ -55,13 +55,13 @@
 
 
 @media only screen and (max-width: 768px) {  
-    .main-posts,
-    .alm-reveal {
-        grid-template-columns: repeat(1,1fr);
-        grid-column: 1/1;
-        grid-gap: 0;
-        .main-post {
-            margin-bottom: 1rem;
-        }
-    }
+    // .main-posts,
+    // .alm-reveal {
+    //     grid-template-columns: repeat(1,1fr);
+    //     grid-column: 1/1;
+    //     grid-gap: 0;
+    //     .main-post {
+    //         margin-bottom: 1rem;
+    //     }
+    // }
 }

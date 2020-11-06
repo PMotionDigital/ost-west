@@ -6,7 +6,16 @@ jQuery(function($){
     const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
+    const socialLogin = $('[data-modal-login="social"]');
+    const miniOrange = $('.btn-social.btn-google')
 
+
+    // логинимся через гугл
+    socialLogin.on('click', function() {
+        miniOrange.trigger('click');
+    });
+
+    // логинимся через стандартн
 	loginForm.on('submit', function(e) {
 
         e.preventDefault();

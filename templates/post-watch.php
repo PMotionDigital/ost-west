@@ -11,12 +11,6 @@ $playlistId = get_field('playlist_id');
 $playlistitems = json_decode(file_get_contents('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults='. $maxResults .'&playlistId='. $playlistId .'&key='. $API_key .''));
 $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v3/playlists?part=snippet&id='. $playlistId .'&key='. $API_key .''));
 ?>
-<!-- <h1>
-    Next page token: <?php echo $playlistitems->nextPageToken; ?><br>
-    Page info. total Results:  <?php echo $playlistitems->pageInfo->totalResults; ?><br>
-    Page info. Results per page:  <?php echo $playlistitems->pageInfo->resultsPerPage; ?><br>
-    player.embedHtml:  <?php echo $playlistitems->contentDetails[0]->videoId; ?><br>
-</h1> -->
     <section class="watch">
         <?php get_template_part('templates/parts/section-programm'); ?>
         <div class="watch_selected selected-programm dis-flex flex-wrap-wrap">
@@ -56,7 +50,12 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
                         <h3 class="episode_title">
                         <?php echo $item->snippet->title; ?>
                         </h3>
-                        <p class="episode_date"><?php echo $item->snippet->publishedAt; ?></p>
+                        <p class="episode_date">
+                        <?php 
+                            $videoDate = $item->snippet->publishedAt;
+                            echo date("d/m/Y", strtotime($videoDate));
+                        ?>
+                        </p>
                     </button>
                 </li>
                 <?php } ?>

@@ -66,6 +66,12 @@
     font-size: 1.1rem;
 }
 
+.country-select {
+    .flag {
+        background-image: url(../img/flags.png);
+    }
+}
+
 // столбец с выбором подписки
 .user-info_subscribe {
     grid-column: 3/6;
