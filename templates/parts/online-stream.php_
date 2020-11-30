@@ -4,8 +4,7 @@
     $today = gmdate("n/j/Y g:i:s A");
 
     // URL of media we want to handle with pay-per-view
-    // $initial_url = "https://cdn2.rtvd.de/livebackup/5/playlist.m3u8";
-	$initial_url = "https://cdn2.rtvd.de/live2/live2/playlist.m3u8";
+    $initial_url = "https://cdn2.rtvd.de/livebackup/5/playlist.m3u8";
     // client ID which is defined based on customer's database of users
     $id = "2";
     // A password entered in WMSAuth rule via web interface

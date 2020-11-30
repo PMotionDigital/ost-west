@@ -29,17 +29,9 @@
                 ?>
                 <img src="<?php echo $profile_image; ?>" alt="<?php echo $user_info->user_login; ?>">
             </div>
-            <div class="user-stat_name">
-                <?php
-                    $myvalue = get_the_author_meta( 'first_name', $current_user->ID );
-                    $arr = explode(' ',trim($myvalue));
-                    
-                    echo $arr[0]; // will print Test  
-                ?>
-            </div>
         </a>
         <?php } else { ?>
-        <button data-modal-btn="login"></button>
+        <a href="/auth/" class="nav-meta_item-user"></a>
         <?php } ?>
         
     </div>

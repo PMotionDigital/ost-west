@@ -1,0 +1,71 @@
+body.page-template-page-auth {
+    .page-default {
+        position: relative;
+        padding: 2.5rem 0;
+        margin-top: 0;
+        min-height: calc(100vh - 16.6rem);
+        color: $white;
+    }
+
+    .page-default_content {
+        margin-top: 0rem;
+    }
+
+    .main-footer {
+        margin-top: 0;
+    }
+
+    .page-auth_bg {
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .nav-tabs {
+        display: grid;
+        grid-template-columns: repeat(2,2fr);
+    }
+
+    .nav-tabs_item {
+        text-align: center;
+        &:first-child a {
+            border-top-left-radius: .5rem;
+        }
+        &:last-child a {
+            border-top-right-radius: .5rem;
+        }
+        a {
+            color: $purple;
+        }
+    }
+
+    .modal_wrap {
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+    }
+
+}
+
+// responsive
+
+@media only screen and (max-width: 1024px) {
+    body.page-template-page-auth {
+        .page-default_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .page-default_content {
+            width: 100%;
+        }
+    }
+    .google-button__icon svg, .facebook-button__icon svg {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}

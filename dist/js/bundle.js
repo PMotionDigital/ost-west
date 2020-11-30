@@ -16353,6 +16353,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_components_note_form__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_parts_components_note_form__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./parts/components/cookie-message */ "./src/js/parts/components/cookie-message.js");
 /* harmony import */ var _parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_parts_components_cookie_message__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _parts_components_tabs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./parts/components/tabs */ "./src/js/parts/components/tabs.js");
+/* harmony import */ var _parts_components_tabs__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_parts_components_tabs__WEBPACK_IMPORTED_MODULE_17__);
 // files
 // import './parts/test';
 // //
@@ -16381,6 +16383,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // blocks
+
 
 
 
@@ -16542,13 +16545,21 @@ jQuery(function($){
     const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
-    const socialLogin = $('[data-modal-login="social"]');
-    const miniOrange = $('.btn-social.btn-google')
+
+    const socialLoginGoogle = $('[data-modal-login="google"]');
+    const socialLoginFacebook = $('[data-modal-login="facebook"]');
+
+    const miniOrangeGoogle = $('.btn-social.btn-google')
+    const miniOrangeFacebook = $('.btn-social.btn-facebook')
 
 
     // логинимся через гугл
-    socialLogin.on('click', function() {
-        miniOrange.trigger('click');
+    socialLoginGoogle.on('click', function() {
+        miniOrangeGoogle.trigger('click');
+    });
+
+    socialLoginFacebook.on('click', function() {
+        miniOrangeFacebook.trigger('click');
     });
 
     // логинимся через стандартн
@@ -16718,21 +16729,28 @@ const modal = $('.modal[data-modal]');
 const modalBtn = $('[data-modal-btn]');
 const modalClose = $('[data-modal-close]');
 
-modalBtn.on('click', function(e) {
+modalBtn.on('click', function (e) {
 
     e.preventDefault();
 
     let curModal = $(this).attr('data-modal-btn');
+
     $(`.modal`).removeClass('open');
     $(`.modal[data-modal="${curModal}"]`).addClass('open');
+
+    const firstInput = $(`.modal[data-modal="${curModal}"]`).find('input')[0];
+    if (firstInput) {
+        setTimeout(() => {
+            firstInput.focus();
+        }, 500);
+    }
+
 });
 
-modalClose.on('click', function() {
+modalClose.on('click', function () {
     let curModal = $(this).closest('.modal')
     curModal.removeClass('open');
 });
-
-
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -16752,6 +16770,40 @@ noteFormClose.on('click', function() {
     noteForm.removeClass('open');
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./src/js/parts/components/tabs.js":
+/*!*****************************************!*\
+  !*** ./src/js/parts/components/tabs.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.addEventListener("load", function () {
+    // store tabs variable
+    var myTabs = document.querySelectorAll(".nav-tabs .nav-tabs_item");
+
+    function myTabClicks(tabClickEvent) {
+        for (var i = 0; i < myTabs.length; i++) {
+            myTabs[i].classList.remove("active");
+        }
+        var clickedTab = tabClickEvent.currentTarget;
+        clickedTab.classList.add("active");
+        tabClickEvent.preventDefault();
+        var myContentPanes = document.querySelectorAll(".tab-pane");
+        for (i = 0; i < myContentPanes.length; i++) {
+            myContentPanes[i].classList.remove("active");
+        }
+        var anchorReference = tabClickEvent.target;
+        var activePaneId = anchorReference.getAttribute("href");
+        var activePane = document.querySelector(activePaneId);
+        activePane.classList.add("active");
+    }
+    for (i = 0; i < myTabs.length; i++) {
+        myTabs[i].addEventListener("click", myTabClicks)
+    }
+});
 
 /***/ }),
 
@@ -17104,6 +17156,7 @@ __webpack_require__.r(__webpack_exports__);
 const watchVideo = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-video-id]');
 const watchVideoModalwrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-modal="watch"] .modal_wrap');
 const videoIframe = watchVideoModalwrap.find('iframe');
+const modalClose = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-modal-close]');
 
 watchVideo.on('click', function() {
     let videoId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('data-video-id');
@@ -17115,6 +17168,9 @@ watchVideo.on('click', function() {
     console.log(`https://www.youtube.com/embed/${videoId}`);
 });
 
+modalClose.on('click', function() {
+    watchVideoModalwrap.html('');
+});
 
 /***/ }),
 

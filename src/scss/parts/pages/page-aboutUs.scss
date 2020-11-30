@@ -278,7 +278,6 @@
 //Form
 
 .services_form-section{
-    margin-left: 8rem;
     padding: 2rem;
     background-color: $white;
     border-radius: 1rem;
@@ -347,4 +346,16 @@
     .services_desc {
         padding: 0;
     }
+
+    // slick arrows
+
+    .faces_list {
+        .slick-next {
+            right: 1.5rem;
+        }
+        .slick-prev {
+            left: 1.5rem;
+        }
+    }
+
 }

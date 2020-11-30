@@ -64,7 +64,7 @@
                     <?php the_field('блок_реквизиты'); ?>
                 </div>
             </div>
-            <div class="services_form-section col-lm-11 col-xs-11">
+            <div class="services_form-section col-lg-6 col-lm-11 col-xs-11">
                 <div class="services_form-title">
                     Пишите нам на почту <a href="mailto:info@ostwest.tv">info@ostwest.tv</a> или используйте форму обратной связи
                 </div>

@@ -18,45 +18,46 @@
         pointer-events: all;
     }
 
-    .modal_wrap {
-        padding: 2rem;
-        border-radius: .5rem;
-        background-color: $white;
-        position: relative;
-        z-index: 1;
-        max-height: 90%;
-        overflow-y: scroll;
-        &::-webkit-scrollbar {
-            display: none; 
-        }
-    }
-    form {
-        display: grid;
-        grid-template-columns: repeat(1,1fr);
-        grid-gap: 1rem;
-    }
+}
 
-    .form-footer {
-        .between-word {
-            display: inline-block;
-            margin: 0 .5rem;
-        }
-        button:not(.button) {
-            color: $purple;
-        }
+.modal_wrap {
+    padding: 2rem;
+    border-radius: .5rem;
+    background-color: $white;
+    position: relative;
+    z-index: 1;
+    max-height: 90%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none; 
     }
-
+}
+form {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 1rem;
     input {
         width: 100%;
     }
+}
 
-    .modal_close {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        z-index: 0;
+.form-footer {
+    .between-word {
+        display: inline-block;
+        margin: 0 .5rem;
     }
+    button:not(.button) {
+        color: $purple;
+    }
+    
+}
+
+.modal_close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 0;
 }

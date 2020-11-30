@@ -3,6 +3,7 @@ import $ from "jquery";
 const watchVideo = $('[data-video-id]');
 const watchVideoModalwrap = $('[data-modal="watch"] .modal_wrap');
 const videoIframe = watchVideoModalwrap.find('iframe');
+const modalClose = $('[data-modal-close]');
 
 watchVideo.on('click', function() {
     let videoId = $(this).attr('data-video-id');
@@ -12,4 +13,8 @@ watchVideo.on('click', function() {
     `);
 
     console.log(`https://www.youtube.com/embed/${videoId}`);
+});
+
+modalClose.on('click', function() {
+    watchVideoModalwrap.html('');
 });

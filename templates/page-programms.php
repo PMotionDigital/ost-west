@@ -31,7 +31,7 @@
                         <h3><?php the_title(); ?></h3>
                         <?php the_excerpt(); ?>
                         <div class="programm-list_item-buttons">
-                            <a href="../programma" class="button type-2">Смотреть</a>
+                            <a href="<?php the_field('ссылка_на_плейлист'); ?>" class="button type-2">Смотреть</a>
                             <a href="<?php the_permalink(); ?>" class="button type-2">Эпизоды</a>
                         </div>
                     </div>

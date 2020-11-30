@@ -3,7 +3,7 @@
 <?php get_template_part('templates/parts/section-now-tv'); ?>
 <div class="front-posts dis-flex justify-content-center">
     <div class="col-lg-11">
-        <div class="section-title type-1">
+        <div class="section-title type-2">
             <h2>Новости</h2>
         </div>
         <section class="main-posts">

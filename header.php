@@ -31,14 +31,7 @@
                     'menu_class'      => 'main-nav_menu nav-menu',
                 ]); ?>
                 <div class="main-nav_meta nav-meta">
-                    <div class="nav-meta_item-search">
-                        <button data-search-button></button>
-                    </div>
-                    <a href="/profile/" class="nav-meta_item-user page_item user-stat">
-                        <?php 
-                            get_template_part('templates/parts/header/header-user'); 
-                        ?>
-                    </a>
+                    <?php get_template_part('templates/parts/header/header-user'); ?>
                 </div>
             </div>
         </div>

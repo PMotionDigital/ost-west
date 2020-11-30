@@ -68,7 +68,7 @@ if(get_field('аватар_пользователя', 'user_'. $current_user->ID
                         <button data-modal-btn="pay" class="button type-1" data-choose-tariff>Выбрать тариф</button>
                     </div>
                     <div class="tariff-item_pay" style="display:none !important;">
-                        <?php echo do_shortcode('[wp_paypal button="buynow" product_name="'. $tariff_name .'" prod_type="tariff_'. $counter .'"]'); ?>
+                        <?php echo do_shortcode('[wp_paypal button="subscribe" product_name="'. $tariff_name .'" prod_type="tariff_'. $counter .'"]'); ?>
                     </div>
                 </div>
                 <?php $counter++; ?>
@@ -79,14 +79,6 @@ if(get_field('аватар_пользователя', 'user_'. $current_user->ID
                 <h2>История платежей</h2>
             </div>
             <div class="payment-history">
-                <!-- <div class="payment-history_item">
-                    <div class="payment-history_item_date">
-                        16.03.2020 - 16.03.2020
-                    </div>
-                    <div class="payment-history_item_name">
-                        Подписка на месяц
-                    </div>
-                </div> -->
                 <?php show_user_subscribes($current_user->ID); ?>
             </div>
         </div>

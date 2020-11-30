@@ -1,7 +1,14 @@
 .page-default {
     margin-top: 2.5rem;
+    min-height: calc(100vh - 24.1rem);
 }
 
 .page-default_content {
     margin-top: 2rem;
 }
+
+.page-default_wrapper {
+    position: relative;
+    z-index: 1;
+}
+

@@ -13,25 +13,26 @@ $playlists = json_decode(file_get_contents('https://www.googleapis.com/youtube/v
 ?>
     <section class="watch">
         <?php get_template_part('templates/parts/section-programm'); ?>
-        <div class="watch_selected selected-programm dis-flex flex-wrap-wrap">
-            <div class="selected-programm_image col-lg-4 col-xs-12">
-                <?php 
-                    if(get_the_post_thumbnail_url()) {
-                        $post_image = get_the_post_thumbnail_url();
-                    } else {
-                        $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
-                    }
-                ?>
-                <img src="<?php echo $post_image; ?>">
-            </div>
-            <div class="selected-programm_desc text-block col-lg-4 col-xs-12">
-                <h1 class="section-title type-1"><?php the_title(); ?></h1>
-                <p>
-                <?php the_field('описание_плейлиста'); ?>
-                </p>
+        <div class="watch_selected selected-programm dis-flex justify-content-center">
+            <div class="col-lg-12 dis-flex flex-wrap-wrap">
+                <div class="selected-programm_image col-lg-4 col-xs-12">
+                    <?php 
+                        if(get_the_post_thumbnail_url()) {
+                            $post_image = get_the_post_thumbnail_url();
+                        } else {
+                            $post_image = get_template_directory_uri().'/src/img/placeholder-land.jpg';
+                        }
+                    ?>
+                    <img src="<?php echo $post_image; ?>">
+                </div>
+                <div class="selected-programm_desc text-block col-lg-4 col-xs-12">
+                    <h1 class="section-title type-1"><?php the_title(); ?></h1>
+                    <p>
+                    <?php the_field('описание_плейлиста'); ?>
+                    </p>
+                </div>
             </div>
         </div>
-
         <div class="watch_episodes episodes">
             <div class="dis-flex justify-content-center">
                 <div class="col-lg-11">

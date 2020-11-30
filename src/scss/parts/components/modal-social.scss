@@ -1,0 +1,36 @@
+.modal-social {
+	display: none;
+}
+
+.modal-social_list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    
+    .modal-social_list-title {
+        width: 100%;
+        margin-bottom: .5rem;
+        font-size: .85rem;
+        color: #ababab;
+    }
+
+	button {
+		&:not(:last-child) {
+			margin-right: .5rem;
+		}
+	}
+}
+
+// для мобилок
+@media screen and (max-width: 767px) {
+    .modal-social_list {
+        justify-content: flex-start;
+        .google-button__text {
+            display: none;
+        }
+        .google-button__icon,
+        .facebook-button__icon {
+            margin: 8px;
+        }
+    }
+}

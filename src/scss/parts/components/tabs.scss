@@ -1,0 +1,47 @@
+.container--tabs {
+
+	.modal_wrap {
+		border-radius: 0rem;
+	}
+
+	.nav-tabs {
+		display: flex;
+		.nav-tabs_item {
+			> a {
+				display: block;
+				padding: 1rem;
+				//font-size: 1.35rem;
+				background-color: rgba($white, .85);
+				backdrop-filter: blur(5px);
+				border-bottom: 2px solid transparent;
+				transition: all .25s ease-in-out;
+				cursor: pointer;
+			}
+
+			&.active,
+			&:hover {
+				> a,
+				> a:focus {
+					background-color: $white;
+					border-color: $purple;
+					box-shadow: 0px 0px 0px #fff, inset 0px 0px 10px rgba($black, .1);
+				}
+			}
+		}
+	}
+
+	.tab-content {
+		> .tab-pane {
+			display: none;
+
+			&.active {
+				display: block;
+			}
+		}
+
+		> .active {
+			display: block;
+		}
+	}
+
+}

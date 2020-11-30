@@ -30,6 +30,8 @@
 @import './parts/posts/main-post.scss';
 @import './parts/components/breadcrumbs.scss';
 @import './parts/components/cookie-message.scss';
+@import './parts/components/modal-social.scss';
+@import './parts/components/tabs.scss';
 
 // modals
 @import './parts/components/modals/modals.scss';
@@ -48,6 +50,7 @@
 @import './parts/pages/page-guide.scss';
 @import './parts/pages/single-post.scss';
 @import './parts/pages/page-online.scss';
+@import './parts/pages/page-auth.scss';
 
 // main
 @import './parts/main';

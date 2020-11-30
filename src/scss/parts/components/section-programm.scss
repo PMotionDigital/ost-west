@@ -89,17 +89,17 @@
 }
 
 .programm-list_item-image {
-    height: 15rem;
+    //height: 15rem;
     position: relative;
     z-index: 2;
     overflow: hidden;
     img {
-        position: absolute;
+        //position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        //width: 100%;
+        //height: 100%;
+        //object-fit: cover;
     }
 }
 
@@ -155,7 +155,7 @@
     }
     .programm-list_item {
         display: inline-block;
-        height: 29vh;
+        height: auto;
         width: 90%;
         &:not(:last-child) {
             margin-right: .5rem;

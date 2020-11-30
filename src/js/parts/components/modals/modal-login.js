@@ -6,13 +6,21 @@ jQuery(function($){
     const noteFormText = noteForm.find('.note-form_text');
     const loginForm = $('#pt_login_form');
     const formBtn = loginForm.find('button[type="submit"]');
-    const socialLogin = $('[data-modal-login="social"]');
-    const miniOrange = $('.btn-social.btn-google')
+
+    const socialLoginGoogle = $('[data-modal-login="google"]');
+    const socialLoginFacebook = $('[data-modal-login="facebook"]');
+
+    const miniOrangeGoogle = $('.btn-social.btn-google')
+    const miniOrangeFacebook = $('.btn-social.btn-facebook')
 
 
     // логинимся через гугл
-    socialLogin.on('click', function() {
-        miniOrange.trigger('click');
+    socialLoginGoogle.on('click', function() {
+        miniOrangeGoogle.trigger('click');
+    });
+
+    socialLoginFacebook.on('click', function() {
+        miniOrangeFacebook.trigger('click');
     });
 
     // логинимся через стандартн

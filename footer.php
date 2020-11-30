@@ -20,12 +20,15 @@
 		Diese Webseite verwendet Cookies. Hier <a href="/datenschutzerklarung">klicken für mehr Informationen. Schlissen</a>
 		<div class="cookie-message_close"></div>
     </div>
-	<?php 
-	if (!is_user_logged_in()) {
-		get_template_part('templates/parts/modals/modal-login');
-		get_template_part('templates/parts/modals/modal-register'); 
-	}
-	?>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-53741768-3"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-53741768-3');
+	</script>
 	<?php wp_footer(); ?>
 </body>
 </html>
